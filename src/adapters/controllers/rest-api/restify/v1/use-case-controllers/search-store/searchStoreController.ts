@@ -8,9 +8,9 @@ class SearchStoreController extends AbstractController {
     super();
   }
 
-  public async execute(event: any, context: any, session: Session, logger?: Logger): Promise<UseCaseResponse> {
+  public async execute(event: any, context: any, session: Session, logger: Logger): Promise<UseCaseResponse> {
 
-		console.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
+		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
 
 		return {
       generic_code: 200,

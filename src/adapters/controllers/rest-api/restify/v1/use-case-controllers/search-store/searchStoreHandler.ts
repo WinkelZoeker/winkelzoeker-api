@@ -3,20 +3,22 @@ import {Request, Response, Next} from 'restify';
 import {ApiHandler, HttpVerb} from '../../api-handler';
 import { ApiResponse, UseCaseResponse } from '../../../../../models';
 import { SearchStoreController } from './searchStoreController';
+import ConsoleLogger from '../../../../../../infrastructure/consoleLogger';
+import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 
 class SearchStoreHandler extends ApiHandler {
-	constructor(apiVersion: string) {
-		super(new SearchStoreController({}), HttpVerb.GET, apiVersion, '$search');
+	constructor(logger: Logger, apiVersion: string) {
+		super(new SearchStoreController({}), logger, HttpVerb.GET, apiVersion, '$search');
 	}
 
 	protected async execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse> {
 
-		console.debug(`>>>>>>>> CALLED SearchStoreHandler.execute <<<<<<<<<<<`);
+		this.logger.debug(`>>>>>>>> CALLED SearchStoreHandler.execute <<<<<<<<<<<`);
 
-		const useCaseResponse: UseCaseResponse = this.controller.execute({}, {}, {});
+		const useCaseResponse: UseCaseResponse = this.controller.execute({}, {}, {}, this.logger);
 
 		return useCaseResponse;
 	}
 }
 
-export default SearchStoreHandler;
+export default (logger: Logger, apiVersion: string): ApiHandler => new SearchStoreHandler(logger, apiVersion);

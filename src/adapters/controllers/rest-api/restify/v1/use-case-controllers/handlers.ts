@@ -1,12 +1,12 @@
 import { ApiHandler } from '../api-handler';
-import SearchStoreHandler from './search-store/searchStoreHandler';
-import HealthHandler from './health/healthHandler';
+import searchStoreHandlerFactory from './search-store/searchStoreHandler';
+import healthHandlerFactory from './health/healthHandler';
+import { Logger } from 'src/usecases/ports/infrastructure';
 
-const API_VERSION = 'v1'
-
-const handlers: ApiHandler[] = [
-	new HealthHandler(API_VERSION),
-	new SearchStoreHandler(API_VERSION)
+const handlers: ((logger: Logger, apiVersion: string) => ApiHandler)[] = [
+	searchStoreHandlerFactory,
+	healthHandlerFactory
 ]
+
 
 export { handlers };

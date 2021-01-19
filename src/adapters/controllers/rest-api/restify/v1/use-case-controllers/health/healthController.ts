@@ -8,9 +8,9 @@ class HealthController extends AbstractController {
     super();
   }
 
-  public async execute(event: any, context: any, session: Session, logger?: Logger): Promise<UseCaseResponse> {
+  public async execute(event: any, context: any, session: Session, logger: Logger): Promise<UseCaseResponse> {
 
-		console.debug(`>>>>>>>> CALLED HealthController.execute <<<<<<<<<<<`);
+		logger.debug(`>>>>>>>> CALLED HealthController.execute <<<<<<<<<<<`);
 
 		return {
       code: 200,

@@ -1,5 +1,6 @@
 import { Request, Response, Next } from 'restify';
 import { ApiResponse, UseCaseResponse } from 'src/adapters/controllers/models';
+import { Logger } from 'src/usecases/ports/infrastructure';
 import AbstractController from '../../abstractController';
 
 enum HttpVerb {
@@ -16,6 +17,7 @@ enum HttpVerb {
 */
 abstract class ApiHandler {
 	constructor(protected controller: AbstractController, 
+		public logger: Logger,
 		public verb: HttpVerb, 
 		public version:string, 
 		private _endpoint: string) {
