@@ -1,4 +1,4 @@
-import { Logger } from "src/usecases/ports/infrastructure";
+import { Logger } from "../../usecases/ports/infrastructure";
 
 export default class ConsoleLogger implements Logger {
   debug(message: any, data?: any): void {
