@@ -5,7 +5,7 @@ import { Logger } from 'src/usecases/ports/infrastructure';
 
 const handlers: ((logger: Logger, apiVersion: string) => ApiHandler)[] = [
 	searchStoreHandlerFactory,
-	healthHandlerFactory
+	// healthHandlerFactory
 ]
 
 

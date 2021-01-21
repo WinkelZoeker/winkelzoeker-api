@@ -7,6 +7,8 @@ import * as restifyPlugins from 'restify-plugins';
 import ConsoleLogger from '../../../../../adapters/infrastructure/consoleLogger';
 import { Logger } from '../../../../../usecases/ports/infrastructure';
 import config from './config';
+
+import { registerMiddleware } from './middleware'
 import { registerRoutes } from './routes'
 
 
@@ -35,6 +37,7 @@ server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 
 
+registerMiddleware(server, logger);
 
 /**
 	* Start Server, Connect to DB & Require Routes

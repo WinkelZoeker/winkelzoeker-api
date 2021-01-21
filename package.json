@@ -31,7 +31,8 @@
     "http-status-codes": "^2.1.4",
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2",
-    "restify-plugins": "^1.6.0"
+    "restify-plugins": "^1.6.0",
+    "server-health": "^5.0.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.20",
