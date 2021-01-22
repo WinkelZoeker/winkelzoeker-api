@@ -1,6 +1,11 @@
+import mongoose from 'mongoose'
 import { CRUDRepository } from '../../usecases/ports/infrastructure';
 
 export default class AbstractMongoRepository<T,K> implements CRUDRepository<T,K> {
+
+  constructor(private schema: mongoose.Schema, private dbConnection: mongoose.Connection) {
+	}
+
 	async findByKey(key: K) : Promise<T | undefined> {
 		return undefined;
 	}

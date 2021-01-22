@@ -1,6 +1,8 @@
 temp/
 src/**/*.js
 src/**/*.map
+reports/
+
 
 # Logs
 logs
