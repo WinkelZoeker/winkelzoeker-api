@@ -3,6 +3,9 @@ import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
 import { UseCaseResponse } from '../../../../../models';
 
+import StoreRepository from '../../../../../../../usecases/ports/repository/storeRepository';
+import StoreMongoRepository from '../../../../../../../adapters/repository/storeMongoRepository';
+
 class SearchStoreController extends AbstractController {
   constructor(private service: any) {
     super();
@@ -12,9 +15,12 @@ class SearchStoreController extends AbstractController {
 
 		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
 
+		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
+		const total = await storeRepository.getAll();
+
 		return {
       generic_code: 200,
-      generic_field: "200",
+      totalRecords: total,
     } as UseCaseResponse;
   }
 }

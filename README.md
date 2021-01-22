@@ -24,6 +24,9 @@ npm install
 
 ## Run tests
 
+Environment variables:
+	DEFAULT_ENVIRONMENT=[DEV]
+
 ```sh
 npm run test
 ```

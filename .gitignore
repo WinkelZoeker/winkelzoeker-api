@@ -2,7 +2,7 @@ temp/
 src/**/*.js
 src/**/*.map
 reports/
-
+*.env
 
 # Logs
 logs
