@@ -17,6 +17,9 @@ class SearchStoreController extends AbstractController {
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
 		const records = await storeRepository.findAll();
+
+		console.log(`MAPPED RECORDS = ${JSON.stringify(records[0], null, 2)}`);
+
 		const total = records.length;
 		// const total = 999;
 
