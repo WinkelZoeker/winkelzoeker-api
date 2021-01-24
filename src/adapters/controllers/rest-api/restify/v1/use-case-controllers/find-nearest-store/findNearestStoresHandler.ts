@@ -2,7 +2,7 @@
 import {Request, Response, Next} from 'restify';
 import {ApiHandler, HttpVerb} from '../../api-handler';
 import { ApiResponse, UseCaseResponse } from '../../../../../models';
-import { SearchStoreController } from './searchStoreController';
+import { SearchStoreController } from './findNearestStoresController';
 import ConsoleLogger from '../../../../../../infrastructure/consoleLogger';
 import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 

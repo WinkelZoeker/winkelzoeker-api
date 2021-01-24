@@ -110,14 +110,14 @@ printlncolor "Starting the tests."
 
 apiVersion='v1'
 
-endpoint='health'
-printlncolor '----------------------------------------------------------------------------------------------------------'
-printlncolor "/health"
-printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
-printlncolor "Expected HTTP STATUS: 200 (OK)"
-printlncolor '----------------------------------------------------------------------------------------------------------'
-curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
-echo
+# endpoint='health'
+# printlncolor '----------------------------------------------------------------------------------------------------------'
+# printlncolor "/health"
+# printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
+# printlncolor "Expected HTTP STATUS: 200 (OK)"
+# printlncolor '----------------------------------------------------------------------------------------------------------'
+# curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
+# echo
 
 endpoint='$search'
 printlncolor '----------------------------------------------------------------------------------------------------------'

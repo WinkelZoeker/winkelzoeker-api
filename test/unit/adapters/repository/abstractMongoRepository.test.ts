@@ -6,11 +6,11 @@ import Store from "../../../../src/core/store";
 import AbstractMongoRepository from "../../../../src/adapters/repository/abstractMongoRepository";
 import "../../loadEnvVariables";
 
-class MockMongoRepository extends AbstractMongoRepository<Store, string> {
-	public get collection(): string {
-		return "stores";
-	}
-}
+// class MockMongoRepository extends AbstractMongoRepository<Store, string> {
+// 	public get collection(): string {
+// 		return "stores";
+// 	}
+// }
 
 // https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose
 // https://tomanagle.medium.com/strongly-typed-models-with-mongoose-and-typescript-7bc2f7197722
@@ -23,8 +23,8 @@ describe("AbstractMongoRepository", () => {
 
 
 
-			const amr = new MockMongoRepository();
-			amr.connect();
+			// const amr = new MockMongoRepository();
+			// amr.connect();
 
 
 		});

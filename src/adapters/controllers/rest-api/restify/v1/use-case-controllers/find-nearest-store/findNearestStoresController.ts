@@ -4,7 +4,9 @@ import AbstractController from '../../../../abstractController';
 import { UseCaseResponse } from '../../../../../models';
 
 import StoreRepository from '../../../../../../../usecases/ports/repository/storeRepository';
-import StoreMongoRepository from '../../../../../../../adapters/repository/storeMongoRepository';
+import StoreMongoRepository from '../../../../../../repository/storeMongoRepository';
+import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findNearestStoresUseCase';
+import GeoLocation from '../../../../../../../core/geoLocation';
 
 class SearchStoreController extends AbstractController {
   constructor(private service: any) {
@@ -16,16 +18,17 @@ class SearchStoreController extends AbstractController {
 		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
-		const records = await storeRepository.findAll();
 
-		console.log(`MAPPED RECORDS = ${JSON.stringify(records[0], null, 2)}`);
+		const findNearestStoreUC = new FindNearestStoresUseCase(storeRepository);
 
-		const total = records.length;
-		// const total = 999;
+		// const geoLocation = new GeoLocation(51.4416, 5.4697);
+		const geoLocation = new GeoLocation(51.417429, 5.444537);
+
+		const stores = await findNearestStoreUC.execute(geoLocation);
 
 		return {
       generic_code: 200,
-      totalRecords: total,
+      stores: stores,
     } as UseCaseResponse;
   }
 }

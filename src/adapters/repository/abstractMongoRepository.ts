@@ -12,6 +12,7 @@ export default abstract class AbstractMongoRepository<T, D extends Document<any>
 	constructor() {
 	}
 
+
 	async findAll() : Promise<T[]> {
 		const records = await this.documentModel.find();
 		return records.map(record => this.documentToCoreModelMapper.mapToCoreModel(record));

@@ -1,10 +1,10 @@
 import { ApiHandler } from '../api-handler';
-import searchStoreHandlerFactory from './search-store/searchStoreHandler';
+import findNearestStoresHandlerFactory from './find-nearest-store/findNearestStoresHandler';
 import healthHandlerFactory from './health/healthHandler';
 import { Logger } from 'src/usecases/ports/infrastructure';
 
 const handlers: ((logger: Logger, apiVersion: string) => ApiHandler)[] = [
-	searchStoreHandlerFactory,
+	findNearestStoresHandlerFactory,
 	// healthHandlerFactory
 ]
 

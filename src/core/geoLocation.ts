@@ -1,12 +1,10 @@
-import { distanceInKm } from "../lib/coordinateUtils";
+import { distanceInMeters } from "../lib/coordinateUtils";
 
 export default class GeoLocation {
 
-	constructor(public longitude: number,
-		public latitude: number
-	) {}
+	constructor(public latitude: number, public longitude: number) {}
 
 	public distanceTo(destination: GeoLocation): number {
-		return distanceInKm(this, destination);
+		return distanceInMeters(this, destination);
 	}
 }
