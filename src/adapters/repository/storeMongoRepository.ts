@@ -1,8 +1,10 @@
+import mongoose, { Document, Schema } from 'mongoose';
+
 import Store from '../../core/store';
 import StoreRepository from '../../usecases/ports/repository/storeRepository';
 import AbstractMongoRepository from './abstractMongoRepository';
 import ModelMapper from './modelMapper';
-import storeSchema from './schemas/StoreSchema';
+import storeSchema, { StoreDocument } from './schemas/storeSchema';
 
 class StoreModelMapper implements ModelMapper<Store> {
 	mapToCoreModel(element: any): Store {
@@ -10,11 +12,12 @@ class StoreModelMapper implements ModelMapper<Store> {
 	}
 }
 
-export default class StoreMongoRepository extends AbstractMongoRepository<Store, string> implements StoreRepository {
+export default class StoreMongoRepository extends AbstractMongoRepository<Store, StoreDocument, string> implements StoreRepository {
 
 	public get collection(): string {
 		return "stores";
 	}
+
 
 	public getDocumentToCoreModelMapper(): ModelMapper<Store> {
 		return new StoreModelMapper();

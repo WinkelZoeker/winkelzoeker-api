@@ -42,11 +42,11 @@ registerMiddleware(server, logger);
 /**
 	* Start Server, Connect to DB & Require Routes
 	*/
-logger.info(`STARTING SERVER ON PORT ${config.port}`);
+logger.info(`STARTING SERVER`);
 server.listen(config.port, () => {
-	logger.debug(`SERVER => ${JSON.stringify(server, null, 2)}`);
+	// logger.debug(`SERVER => ${JSON.stringify(server, null, 2)}`);
 
 	registerRoutes(server, logger);
 
-	logger.info(`SERVER => ${JSON.stringify(server, null, 2)}`);
+	logger.info(`SERVER LISTENING ON PORT ${config.port}`);
 });

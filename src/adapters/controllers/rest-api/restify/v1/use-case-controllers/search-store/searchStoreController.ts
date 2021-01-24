@@ -17,6 +17,7 @@ class SearchStoreController extends AbstractController {
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
 		const total = await storeRepository.getAll();
+		// const total = 999;
 
 		return {
       generic_code: 200,

@@ -1,12 +1,44 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema } from 'mongoose'
 import { CRUDRepository } from '../../usecases/ports/infrastructure';
 import ModelMapper from './modelMapper';
+import { StoreDocument } from './schemas/storeSchema';
 
-export default abstract class AbstractMongoRepository<T,K> implements CRUDRepository<T,K> {
+
+const storeSchema: Schema = new Schema({
+	city: { type: String, required: true },
+	postalCode: { type: String, required: true },
+	street: { type: String, required: true },
+	street2: { type: String, required: true },
+	street3: { type: String, required: true },
+	addressName: { type: String, required: true },
+	uuid: { type: String, required: true },
+	longitude: { type: String, required: true },
+	latitude: { type: String, required: true },
+	complexNumber: { type: String, required: true },
+	showWarningMessage: { type: Boolean, required: true },
+	todayOpen: { type: String, required: true },
+	locationType: { type: String, required: true },
+	collectionPoint: { type: Boolean, required: true },
+	sapStoreID: { type: String, required: true },
+	todayClose: { type: String, required: true }
+});
+export default abstract class AbstractMongoRepository<T, D, K> implements CRUDRepository<T,K> {
 
 	public abstract getDocumentToCoreModelMapper(): ModelMapper<T>;
 
 	public abstract get collection(): string;
+
+	constructor() {
+
+		this.connect();
+		const collection = 'stores';
+
+		const model:  mongoose.Model<mongoose.Document<any>> =  mongoose.model(collection, storeSchema);
+
+		// const modelDoc =  mongoose.model<D>(collection, storeSchema);
+
+	}
+
 
 	connect(): void {
 			// `mongodb+srv://winkelzoeker_database-user:<password>@cluster0.dyuls.mongodb.net/<dbname>?retryWrites=true&w=majority`;
@@ -33,12 +65,6 @@ export default abstract class AbstractMongoRepository<T,K> implements CRUDReposi
 				} catch (error) {
 					console.log(`Exception: ${JSON.stringify(error, null, 2)}`)
 			}
-	}
-
-  constructor() {
-
-		this.connect();
-
 	}
 
 	async findByKey(key: K) : Promise<T | undefined> {
