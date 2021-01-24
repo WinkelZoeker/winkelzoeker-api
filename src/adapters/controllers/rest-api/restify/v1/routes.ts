@@ -15,7 +15,7 @@ import { Logger } from '../../../../../usecases/ports/infrastructure';
 // console.debug(`REGISTERS => ${JSON.stringify(registers, null, 2)}`);
 
 const registerRoute = (server: Server, apiHandler: ApiHandler) => {
-	//debug(`MAPPING => ${JSON.stringify(apiHandler.endpoint, null, 2)}`);
+	console.log(`MAPPING => ${JSON.stringify(apiHandler.endpoint, null, 2)}`);
 	switch (apiHandler.verb) {
 		case HttpVerb.GET: server.get(apiHandler.endpoint, apiHandler.handler); break;
 		case HttpVerb.PUT: server.put(apiHandler.endpoint, apiHandler.handler); break;
@@ -28,9 +28,8 @@ const registerRoute = (server: Server, apiHandler: ApiHandler) => {
 const API_VERSION = 'v1';
 
 const registerRoutes = (server: Server, logger: Logger) => {
-	handlers.forEach(apiHandleraFactory => {
-		registerRoute(server, apiHandleraFactory(logger, API_VERSION)
-		);
+	handlers.forEach(apiHandlerFactory => {
+		registerRoute(server, apiHandlerFactory(logger, API_VERSION));
 	});
 };
 
