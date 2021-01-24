@@ -119,15 +119,27 @@ apiVersion='v1'
 # curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
 # echo
 
-endpoint='$search'
+# endpoint='stores'
+# printlncolor '----------------------------------------------------------------------------------------------------------'
+# printlncolor $endpoint
+# printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
+# printlncolor "Expected HTTP STATUS: 200 (OK)"
+# printlncolor '----------------------------------------------------------------------------------------------------------'
+# curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
+# echo
+
+endpoint='stores'
 printlncolor '----------------------------------------------------------------------------------------------------------'
-printlncolor "/health"
-printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
+printlncolor $endpoint
+printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&maxitems=5"
 printlncolor "Expected HTTP STATUS: 200 (OK)"
 printlncolor '----------------------------------------------------------------------------------------------------------'
-curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
+curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&maxItems=2"
 echo
+echo
+
 
 echo
 printlncolor "Done."
 exit 0
+

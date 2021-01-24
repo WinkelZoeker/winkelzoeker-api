@@ -8,15 +8,17 @@ import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 
 class SearchStoreHandler extends ApiHandler {
 	constructor(logger: Logger, apiVersion: string) {
-		super(new SearchStoreController({}), logger, HttpVerb.GET, apiVersion, '$search');
+		super(new SearchStoreController({}), logger, HttpVerb.GET, apiVersion, 'stores');
 	}
 
 	protected async execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse> {
+		const event = {
+			latitude: req.query['latitude'],
+			longitude: req.query['longitude'],
+			maxItems: req.query['maxItems'],
+		};
 
-		this.logger.debug(`>>>>>>>> CALLED SearchStoreHandler.execute <<<<<<<<<<<`);
-
-		const useCaseResponse: UseCaseResponse = this.controller.execute({}, {}, {}, this.logger);
-
+		const useCaseResponse: UseCaseResponse = this.controller.execute(event, {}, {}, this.logger);
 		return useCaseResponse;
 	}
 }

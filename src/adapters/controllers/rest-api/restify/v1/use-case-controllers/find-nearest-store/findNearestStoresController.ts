@@ -1,7 +1,7 @@
 import { Session } from 'inspector';
 import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
-import { UseCaseResponse } from '../../../../../models';
+import { UseCaseRequest, UseCaseResponse } from '../../../../../models';
 
 import StoreRepository from '../../../../../../../usecases/ports/repository/storeRepository';
 import StoreMongoRepository from '../../../../../../repository/storeMongoRepository';
@@ -15,16 +15,25 @@ class SearchStoreController extends AbstractController {
 
   public async execute(event: any, context: any, session: Session, logger: Logger): Promise<UseCaseResponse> {
 
-		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
+		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute, event : ${JSON.stringify(event, null, 2)}`);
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
-
 		const findNearestStoreUC = new FindNearestStoresUseCase(storeRepository);
 
-		// const geoLocation = new GeoLocation(51.4416, 5.4697);
-		const geoLocation = new GeoLocation(51.417429, 5.444537);
+		const maxItems = event.maxItems || 5;
+		let geoLocation = undefined;
 
-		const stores = await findNearestStoreUC.execute(geoLocation);
+		if(event.latitude && event.longitude) {
+			geoLocation = new GeoLocation(event.latitude, event.longitude);
+		}
+
+		// const geoLocation = new GeoLocation(51.4416, 5.4697);
+		const useCaseRequest: UseCaseRequest = {
+			geoLocation,
+			maxItems
+		};
+
+		const stores = await findNearestStoreUC.execute(useCaseRequest);
 
 		return {
       generic_code: 200,

@@ -1,3 +1,10 @@
-export default interface UseCaseResponse {
+interface UseCaseResponse {
   [key: string]: any;
 }
+
+interface UseCaseRequest {
+  [key: string]: any;
+}
+
+
+export { UseCaseRequest, UseCaseResponse}
