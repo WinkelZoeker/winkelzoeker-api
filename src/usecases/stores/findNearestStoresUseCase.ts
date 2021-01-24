@@ -1,4 +1,4 @@
-import { UseCaseRequest } from "src/adapters/controllers/models";
+import { UseCaseRequest } from "../ports/infrastructure";
 import { Store, GeoLocation } from "../../core";
 import { distanceInMeters } from "../../lib/coordinateUtils";
 import { UseCase } from "../ports/infrastructure";

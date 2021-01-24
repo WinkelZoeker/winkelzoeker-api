@@ -15,7 +15,7 @@ class HealthHandler extends ApiHandler {
 
 		this.logger.debug(`>>>>>>>> CALLED HealthHandler.execute <<<<<<<<<<<`);
 
-		const useCaseResponse: UseCaseResponse = this.controller.execute({}, {}, {}, this.logger);
+		const useCaseResponse: UseCaseResponse = this.controller.execute({}, this.logger);
 
 		return useCaseResponse;
 	}

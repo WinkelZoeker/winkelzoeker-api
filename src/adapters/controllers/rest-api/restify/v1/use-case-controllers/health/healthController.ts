@@ -1,4 +1,3 @@
-import { Session } from 'inspector';
 import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
 
@@ -7,7 +6,7 @@ class HealthController extends AbstractController {
     super();
   }
 
-  public async execute(event: any, context: any, session: Session, logger: Logger): Promise<UseCaseResponse> {
+  public async execute(event: any, logger: Logger): Promise<UseCaseResponse> {
 
 		logger.debug(`>>>>>>>> CALLED HealthController.execute <<<<<<<<<<<`);
 

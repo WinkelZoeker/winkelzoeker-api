@@ -1,4 +1,3 @@
-import { Session } from 'inspector';
 import { Logger, UseCaseRequest, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
 
@@ -11,7 +10,7 @@ class SearchStoreController extends AbstractController {
     super();
   }
 
-  public async execute(event: any, context: any, session: Session, logger: Logger): Promise<UseCaseResponse> {
+  public async execute(event: any, logger: Logger): Promise<UseCaseResponse> {
 
 		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute, event : ${JSON.stringify(event, null, 2)}`);
 

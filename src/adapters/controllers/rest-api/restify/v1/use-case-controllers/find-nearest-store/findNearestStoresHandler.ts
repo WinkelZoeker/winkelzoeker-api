@@ -18,7 +18,7 @@ class SearchStoreHandler extends ApiHandler {
 			maxItems: req.query['maxItems'],
 		};
 
-		const useCaseResponse: UseCaseResponse = this.controller.execute(event, {}, {}, this.logger);
+		const useCaseResponse: UseCaseResponse = this.controller.execute(event, this.logger);
 		return useCaseResponse;
 	}
 }
