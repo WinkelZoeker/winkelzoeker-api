@@ -1,71 +1,48 @@
-import mongoose, { Schema } from 'mongoose'
+import mongoose, { Document, Schema } from 'mongoose'
 import { CRUDRepository } from '../../usecases/ports/infrastructure';
 import ModelMapper from './modelMapper';
 import { StoreDocument } from './schemas/storeSchema';
 
 
-const storeSchema: Schema = new Schema({
-	city: { type: String, required: true },
-	postalCode: { type: String, required: true },
-	street: { type: String, required: true },
-	street2: { type: String, required: true },
-	street3: { type: String, required: true },
-	addressName: { type: String, required: true },
-	uuid: { type: String, required: true },
-	longitude: { type: String, required: true },
-	latitude: { type: String, required: true },
-	complexNumber: { type: String, required: true },
-	showWarningMessage: { type: Boolean, required: true },
-	todayOpen: { type: String, required: true },
-	locationType: { type: String, required: true },
-	collectionPoint: { type: Boolean, required: true },
-	sapStoreID: { type: String, required: true },
-	todayClose: { type: String, required: true }
-});
-export default abstract class AbstractMongoRepository<T, D, K> implements CRUDRepository<T,K> {
+export default abstract class AbstractMongoRepository<T, D extends Document<any>, K> implements CRUDRepository<T,K> {
 
 	public abstract getDocumentToCoreModelMapper(): ModelMapper<T>;
 
 	public abstract get collection(): string;
 
+	public abstract documentModel(): mongoose.Model<D>;
+
+
 	constructor() {
 
-		this.connect();
 		const collection = 'stores';
 
-		const model:  mongoose.Model<mongoose.Document<any>> =  mongoose.model(collection, storeSchema);
+		// const model:  mongoose.Model<mongoose.Document<any>> =  mongoose.model(collection, storeSchema);
 
 		// const modelDoc =  mongoose.model<D>(collection, storeSchema);
 
 	}
 
+	public async getAll() {
 
-	connect(): void {
-			// `mongodb+srv://winkelzoeker_database-user:<password>@cluster0.dyuls.mongodb.net/<dbname>?retryWrites=true&w=majority`;
+		let total = -1;
 
-			const connectionUrl = `mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASS}@${process.env.MONGO_HOST}/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`;
-
-			try {
-				mongoose.connect(
-					connectionUrl,
-					{
-						useNewUrlParser: true,
-						useUnifiedTopology: true
-					}
-				)
-				.then(() => console.log('MongoDB connected…'))
-				.catch(err => console.log(err))
+		const model:  mongoose.Model<mongoose.Document<any>> =  mongoose.model(this.collection, this.documentModel);
 
 
-				//Get the default connection
-				var db = mongoose.connection;
+		// const query = storeSchema.find();
+		const stores = await storeSchema.find();
+		total = stores.length;
 
-				//Bind connection to error event (to get notification of connection errors)
-				db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-				} catch (error) {
-					console.log(`Exception: ${JSON.stringify(error, null, 2)}`)
-			}
+		console.log(`store[0] = ${JSON.stringify(stores[0], null, 2)}`);
+
+		console.log(`Total = ${total}`);
+
+		console.log(`Type store[0] = ${typeof stores[0]}`);
+
+		return total;
 	}
+
 
 	async findByKey(key: K) : Promise<T | undefined> {
 		return undefined;

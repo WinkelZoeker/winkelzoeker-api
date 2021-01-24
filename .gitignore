@@ -2,6 +2,8 @@ temp/
 src/**/*.js
 src/**/*.map
 reports/
+test/unit/*.env
+
 
 # Logs
 logs

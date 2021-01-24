@@ -8,7 +8,7 @@ import { Logger } from '../../../../../../../usecases/ports/infrastructure';
 
 class HealthHandler extends ApiHandler {
 	constructor(logger: Logger, apiVersion: string) {
-		super(new HealthController({}), logger, HttpVerb.GET, apiVersion, 'ping');
+		super(new HealthController({}), logger, HttpVerb.GET, apiVersion, 'health');
 	}
 
 	protected async execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse> {

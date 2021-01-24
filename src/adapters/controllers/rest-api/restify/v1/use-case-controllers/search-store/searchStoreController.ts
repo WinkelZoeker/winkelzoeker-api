@@ -16,7 +16,8 @@ class SearchStoreController extends AbstractController {
 		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute <<<<<<<<<<<`);
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
-		const total = await storeRepository.getAll();
+		const records = await storeRepository.findAll();
+		const total = records.length;
 		// const total = 999;
 
 		return {
