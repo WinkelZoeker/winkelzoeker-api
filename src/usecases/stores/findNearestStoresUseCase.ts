@@ -14,14 +14,15 @@ export default class FindNearestStoresUseCase implements UseCase {
 		const mappedRecords = await this.storeRepository.findAll();
 
 		const mappedRecordsWithDistance = mappedRecords.map((record: Store) => {
-			const distanceKm: number = distanceInMeters(input.geoLocation, new GeoLocation(record.latitude, record.longitude))/1000;
+			const distanceKm: number =
+				distanceInMeters(
+					input.geoLocation,
+					new GeoLocation(record.latitude, record.longitude))/1000;
 			return { ...record, distanceKm };
 		})
-			.sort((storeA, storeB) => storeA.distanceKm > storeB.distanceKm ? 1 : -1 )
-			.slice(0, input.maxItems - 1);
+		.sort((storeA, storeB) => storeA.distanceKm > storeB.distanceKm ? 1 : -1 )
+		.slice(0, input.maxItems);
 
-			// console.log(`Stores: ${JSON.stringify(mappedRecordsWithDistance, null, 2)}`);
-
-		return [mappedRecordsWithDistance[0]];
+		return mappedRecordsWithDistance;
 	}
 }

@@ -12,7 +12,7 @@ export default interface Store {
 	showWarningMessage: boolean;
 	todayOpen: string;
 	locationType: string;
-	collectionPoint: boolean;
+	collectionPoint?: boolean;
 	sapStoreID: string;
 	todayClose: string;
 }
