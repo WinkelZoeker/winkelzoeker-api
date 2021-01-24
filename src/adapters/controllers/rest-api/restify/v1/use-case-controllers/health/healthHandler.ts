@@ -1,10 +1,10 @@
 
 import {Request, Response, Next} from 'restify';
 import {ApiHandler, HttpVerb} from '../../api-handler';
-import { ApiResponse, UseCaseResponse } from '../../../../../models';
+import { ApiResponse } from '../../../../../models';
 import { HealthController } from './healthController';
 import ConsoleLogger from '../../../../../../infrastructure/consoleLogger';
-import { Logger } from '../../../../../../../usecases/ports/infrastructure';
+import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 
 class HealthHandler extends ApiHandler {
 	constructor(logger: Logger, apiVersion: string) {

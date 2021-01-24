@@ -1,9 +1,7 @@
 import { Session } from 'inspector';
-import { Logger } from '../../../../../../../usecases/ports/infrastructure';
+import { Logger, UseCaseRequest, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
-import { UseCaseRequest, UseCaseResponse } from '../../../../../models';
 
-import StoreRepository from '../../../../../../../usecases/ports/repository/storeRepository';
 import StoreMongoRepository from '../../../../../../repository/storeMongoRepository';
 import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findNearestStoresUseCase';
 import GeoLocation from '../../../../../../../core/geoLocation';

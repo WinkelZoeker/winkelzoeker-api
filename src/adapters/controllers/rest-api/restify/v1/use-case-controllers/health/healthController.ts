@@ -1,7 +1,6 @@
 import { Session } from 'inspector';
-import { Logger } from '../../../../../../../usecases/ports/infrastructure';
+import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
-import { UseCaseResponse } from '../../../../../models';
 
 class HealthController extends AbstractController {
   constructor(private service: any) {
