@@ -1,7 +1,6 @@
 import BaseException from "./baseException";
-
-export default class MappingException extends BaseException {
+export default class InternalServerException extends BaseException {
   constructor(message: string,  data: any = {}) {
-    super(400, message);
+    super(500, message);
   }
 }

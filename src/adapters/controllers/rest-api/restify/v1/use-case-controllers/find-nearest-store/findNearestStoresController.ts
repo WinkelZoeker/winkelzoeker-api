@@ -5,32 +5,30 @@ import StoreMongoRepository from '../../../../../../repository/storeMongoReposit
 import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findNearestStoresUseCase';
 import GeoLocation from '../../../../../../../core/geoLocation';
 
-class SearchStoreController extends AbstractController {
+class FindNearestStoresController extends AbstractController {
   constructor(private service: any) {
     super();
   }
 
   public async execute(event: any, logger: Logger): Promise<UseCaseResponse> {
 
-		logger.debug(`>>>>>>>> CALLED SearchStoreController.execute, event : ${JSON.stringify(event, null, 2)}`);
+		console.log(`>>>>>>> FindNearestStoresController => STEP 1`);
 
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
 		const findNearestStoreUC = new FindNearestStoresUseCase(storeRepository);
 
 		const limit = event.limit || 5;
-		let geoLocation = undefined;
-
-		if(event.latitude && event.longitude) {
-			geoLocation = new GeoLocation(event.latitude, event.longitude);
-		}
-
-		// const geoLocation = new GeoLocation(51.4416, 5.4697);
 		const useCaseRequest: UseCaseRequest = {
-			geoLocation,
 			limit
 		};
 
+		if(event.latitude && event.longitude) {
+			useCaseRequest.geoLocation = new GeoLocation(event.latitude, event.longitude);
+		}
+
+		console.log(`>>>>>>> FindNearestStoresController => STEP 2`);
 		const stores = await findNearestStoreUC.execute(useCaseRequest);
+		console.log(`>>>>>>> FindNearestStoresController => STEP 3`);
 
 		return {
       generic_code: 200,
@@ -39,4 +37,4 @@ class SearchStoreController extends AbstractController {
   }
 }
 
-export { SearchStoreController };
+export { FindNearestStoresController };
