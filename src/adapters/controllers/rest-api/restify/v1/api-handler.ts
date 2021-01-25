@@ -1,7 +1,9 @@
+import { StatusCodes } from 'http-status-codes';
 import { Request, Response, Next } from 'restify';
-import { ApiResponse } from 'src/adapters/controllers/models';
+import { ApiResponse, Resource } from '../../../../controllers/models';
 import { Logger, UseCaseResponse } from '../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../abstractController';
+import ResponseMapper from '../../../interfaces/responseMapper';
 
 enum HttpVerb {
 	POST = "post",
@@ -20,6 +22,7 @@ abstract class ApiHandler {
 	public abstract validateRequest(queryParams: any): void;
 
 	constructor(protected controller: AbstractController,
+		private responseMapper: ResponseMapper,
 		public logger: Logger,
 		public verb: HttpVerb,
 		public version: string,
@@ -30,24 +33,22 @@ abstract class ApiHandler {
 		return `/${this.version}/${this._endpoint}`;
 	}
 
+
 	public handler = async (req: Request, res: Response, next: Next): Promise<void> => {
 
 		try {
 			this.validateRequest(req.query);
 
 			const result: UseCaseResponse = await this.execute(req, res, next);
-
-			const response: ApiResponse = {
-				statusCode: 200,
-				data: result
-			}
-
-			res.send(200, response);
+			const response: ApiResponse = this.responseMapper.mapUseCaseResponseToApiResponse(result);
+			res.send(response.statusCode, response);
 			next();
 		} catch (error) {
 			console.log(`ApiHandler.handler: ERROR => ${JSON.stringify(error, null, 2)}`);
 
-			res.send(400, error.message);
+			const response: ApiResponse = this.responseMapper.mapErrorToApiResponse(error);
+
+			res.send(response.statusCode, response);
 			next();
 		}
 	}

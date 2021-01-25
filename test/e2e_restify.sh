@@ -119,14 +119,14 @@ apiVersion='v1'
 # curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
 # echo
 
-# endpoint='stores'
-# printlncolor '----------------------------------------------------------------------------------------------------------'
-# printlncolor $endpoint
-# printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
-# printlncolor "Expected HTTP STATUS: 200 (OK)"
-# printlncolor '----------------------------------------------------------------------------------------------------------'
-# curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
-# echo
+endpoint='stores'
+printlncolor '----------------------------------------------------------------------------------------------------------'
+printlncolor $endpoint
+printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}"
+printlncolor "Expected HTTP STATUS: 200 (OK)"
+printlncolor '----------------------------------------------------------------------------------------------------------'
+curl -i -H "Content-Type: application/json" -X GET ${_API_ADDRESS}/${apiVersion}/${endpoint}
+echo
 
 endpoint='stores'
 printlncolor '----------------------------------------------------------------------------------------------------------'
@@ -137,14 +137,14 @@ printlncolor '------------------------------------------------------------------
 curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&limit=2"
 echo
 
-# endpoint='stores'
-# printlncolor '----------------------------------------------------------------------------------------------------------'
-# printlncolor $endpoint
-# printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=ABC"
-# printlncolor "Expected HTTP STATUS: 400 (BAD REQUEST)"
-# printlncolor '----------------------------------------------------------------------------------------------------------'
-# curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=ABC"
-# echo
+endpoint='stores'
+printlncolor '----------------------------------------------------------------------------------------------------------'
+printlncolor $endpoint
+printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=ABC"
+printlncolor "Expected HTTP STATUS: 400 (BAD REQUEST)"
+printlncolor '----------------------------------------------------------------------------------------------------------'
+curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=ABC"
+echo
 
 echo
 

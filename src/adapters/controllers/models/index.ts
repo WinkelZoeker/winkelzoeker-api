@@ -1,5 +1,5 @@
 import Resource from './resource';
 import ApiResponse from './api-response';
-import WebAdapterError from './webAdapterError';
+import ResponseError from '../exceptions/responseError';
 
-export { Resource, ApiResponse, WebAdapterError };
+export { Resource, ApiResponse, ResponseError };

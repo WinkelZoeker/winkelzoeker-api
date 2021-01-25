@@ -8,13 +8,18 @@ import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/inf
 import BadRequestException from '../../../../../../controllers/exceptions/badRequestException';
 import InternalServerException from '../../../../../../controllers/exceptions/internalServerException';
 import { Controller } from '../../../../../../controllers/rest-api/abstractController';
+import ResponseMapper from '../../../../../interfaces/responseMapper';
+import FindNearestStoresResponseMapper from './findNearestStoresResponseMapper';
 
 /** For clarity concerns, renaming logicalXOR => oneCoordinateElementMissing */
 import oneCoordinateElementMissing from '../../../../../../../lib/logicalXOR';
 
 export class FindNearestStoresHandler extends ApiHandler {
-	constructor(controller: Controller, logger: Logger, apiVersion: string) {
-		super(controller, logger, HttpVerb.GET, apiVersion, 'stores');
+	constructor(controller: Controller,
+		responseMapper: ResponseMapper,
+		logger: Logger,
+		apiVersion: string) {
+		super(controller, responseMapper, logger, HttpVerb.GET, apiVersion, 'stores');
 	}
 
 	public validateRequest(queryParams: any): void {
@@ -62,4 +67,8 @@ export class FindNearestStoresHandler extends ApiHandler {
 	}
 }
 
-export default (logger: Logger, apiVersion: string): ApiHandler => new FindNearestStoresHandler(new FindNearestStoresController({}), logger, apiVersion);
+export default (logger: Logger, apiVersion: string): ApiHandler =>
+	new FindNearestStoresHandler(new FindNearestStoresController({}),
+	new FindNearestStoresResponseMapper(),
+	logger,
+	apiVersion);
