@@ -131,10 +131,10 @@ apiVersion='v1'
 endpoint='stores'
 printlncolor '----------------------------------------------------------------------------------------------------------'
 printlncolor $endpoint
-printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&maxitems=5"
+printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&limit=2"
 printlncolor "Expected HTTP STATUS: 200 (OK)"
 printlncolor '----------------------------------------------------------------------------------------------------------'
-curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&maxItems=2"
+curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.417429&longitude=5.444537&limit=2"
 echo
 echo
 

@@ -87,7 +87,7 @@ describe("FindNearestStoresUseCase", () => {
 
 				const useCaseRequest: UseCaseRequest = {
 				geoLocation: new GeoLocation(51.4416, 5.4697),
-				maxItems: 3
+				limit: 3
 			};
 
 			const result = await findNearestStoreUC.execute(useCaseRequest);

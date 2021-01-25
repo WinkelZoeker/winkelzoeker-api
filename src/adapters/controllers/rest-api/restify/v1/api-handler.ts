@@ -17,11 +17,12 @@ enum HttpVerb {
 */
 abstract class ApiHandler {
 	protected abstract execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse>;
+	public abstract validateRequest(req: Request): void;
 
 	constructor(protected controller: AbstractController,
 		public logger: Logger,
 		public verb: HttpVerb,
-		public version:string,
+		public version: string,
 		private _endpoint: string) {
 	}
 
@@ -30,15 +31,23 @@ abstract class ApiHandler {
 	}
 
 	public handler = async (req: Request, res: Response, next: Next): Promise<void> => {
-		const result: UseCaseResponse = await this.execute(req, res, next);
 
-		const response: ApiResponse = {
-			statusCode: 200,
-			data: result
+		try {
+			this.validateRequest(req);
+
+			const result: UseCaseResponse = await this.execute(req, res, next);
+
+			const response: ApiResponse = {
+				statusCode: 200,
+				data: result
+			}
+
+			res.send(200, response);
+			next();
+		} catch (error) {
+			res.send(400);
+			next();
 		}
-
-		res.send(200, response);
-		next();
 	}
 }
 

@@ -17,7 +17,7 @@ class SearchStoreController extends AbstractController {
 		const storeRepository: StoreMongoRepository = new StoreMongoRepository();
 		const findNearestStoreUC = new FindNearestStoresUseCase(storeRepository);
 
-		const maxItems = event.maxItems || 5;
+		const limit = event.limit || 5;
 		let geoLocation = undefined;
 
 		if(event.latitude && event.longitude) {
@@ -27,7 +27,7 @@ class SearchStoreController extends AbstractController {
 		// const geoLocation = new GeoLocation(51.4416, 5.4697);
 		const useCaseRequest: UseCaseRequest = {
 			geoLocation,
-			maxItems
+			limit
 		};
 
 		const stores = await findNearestStoreUC.execute(useCaseRequest);

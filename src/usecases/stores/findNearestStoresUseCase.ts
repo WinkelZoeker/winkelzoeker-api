@@ -21,7 +21,7 @@ export default class FindNearestStoresUseCase implements UseCase {
 			return { ...record, distanceKm };
 		})
 		.sort((storeA, storeB) => storeA.distanceKm > storeB.distanceKm ? 1 : -1 )
-		.slice(0, input.maxItems);
+		.slice(0, input.limit);
 
 		return mappedRecordsWithDistance;
 	}
