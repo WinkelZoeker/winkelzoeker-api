@@ -1,9 +1,9 @@
 import "../../loadEnvVariables";
 
-import { UseCaseRequest } from "../../../../src/adapters/controllers/models";
 import { GeoLocation, Store } from "../../../../src/core";
 import StoreRepository from "../../../../src/usecases/ports/repository/storeRepository";
 import FindNearestStoresUseCase from "../../../../src/usecases/stores/findNearestStoresUseCase";
+import { UseCaseRequest } from "../../../../src/usecases/ports/infrastructure";
 
 
 
@@ -16,7 +16,9 @@ class MockStoreRepository implements StoreRepository {
 	async exists(key: string): Promise<boolean> { throw new Error("Method not implemented."); }
 }
 
-const storesCollection = [
+import storeObject from './data/stores.json';
+
+const storesCollection: Store[] = [
 	{
 		"city": "Aalsmeer",
 		"postalCode": "1431 HN",

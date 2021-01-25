@@ -16,6 +16,8 @@ enum HttpVerb {
  * Base class for Restify handlers
 */
 abstract class ApiHandler {
+	protected abstract execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse>;
+
 	constructor(protected controller: AbstractController,
 		public logger: Logger,
 		public verb: HttpVerb,
@@ -27,11 +29,7 @@ abstract class ApiHandler {
 		return `/${this.version}/${this._endpoint}`;
 	}
 
-	protected abstract execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse>;
-
 	public handler = async (req: Request, res: Response, next: Next): Promise<void> => {
-
-
 		const result: UseCaseResponse = await this.execute(req, res, next);
 
 		const response: ApiResponse = {
