@@ -1,10 +1,11 @@
 import "../../../../../../../loadEnvVariables";
 
-import ResponseMapper from "../../../../../../../../../src/adapters/controllers/interfaces/responseMapper"
-import FindNearestStoresResponseMapper from "src/adapters/controllers/rest-api/restify/v1/use-case-controllers/find-nearest-store/findNearestStoresResponseMapper";
-import { UseCaseResponse } from "src/usecases/ports/infrastructure";
 import { StatusCodes } from "http-status-codes";
-import { ResponseError } from "src/adapters/controllers/models";
+
+import ResponseMapper from "../../../../../../../../../src/adapters/controllers/interfaces/responseMapper"
+import FindNearestStoresResponseMapper from "../../../../../../../../../src/adapters/controllers/rest-api/restify/v1/use-case-controllers/find-nearest-store/findNearestStoresResponseMapper";
+import { UseCaseResponse } from "../../../../../../../../../src/usecases/ports/infrastructure";
+import { ResponseError } from "../../../../../../../../../src/adapters/controllers/models";
 
 
 const useCaseResponse: UseCaseResponse = {
@@ -27,7 +28,7 @@ describe("FindNearestStoresResponseMapper", () => {
 	});
 
 	describe("mapUseCaseResponseToApiResponse", () => {
-		it("Should map a UseCaseResponse to an ApiResponse", async () => {
+		it("Should map a UseCaseResponse to an ApiResponse", () => {
 
 			const findNearestStoresResponseMapper: ResponseMapper = new FindNearestStoresResponseMapper();
 
@@ -43,7 +44,7 @@ describe("FindNearestStoresResponseMapper", () => {
 	});
 
 	describe("mapErrorToApiResponse", () => {
-		it("Should map an Error to an ApiResponse", async () => {
+		it("Should map an Error to an ApiResponse", () => {
 			const findNearestStoresResponseMapper: ResponseMapper = new FindNearestStoresResponseMapper();
 
 			const apiResponse =
@@ -52,7 +53,7 @@ describe("FindNearestStoresResponseMapper", () => {
 
 			const expectedResponse = {
 				statusCode: StatusCodes.BAD_REQUEST,
-				error: new ResponseError(StatusCodes.BAD_REQUEST, "Both geographic coordinates should be provided")
+				error: "Both geographic coordinates should be provided"
 			};
 
 				expect(apiResponse).toEqual(expectedResponse);

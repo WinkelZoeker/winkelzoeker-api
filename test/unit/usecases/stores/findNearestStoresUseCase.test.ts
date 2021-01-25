@@ -76,6 +76,10 @@ const storesCollection: Store[] = [
 
 describe("FindNearestStoresUseCase", () => {
 
+	afterEach(() => {
+		jest.clearAllMocks();
+	});
+
 	describe("execute", () => {
 		it("should yada yada yada...", async () => {
 			const storeRepository: StoreRepository = new MockStoreRepository();

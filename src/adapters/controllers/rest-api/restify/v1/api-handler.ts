@@ -44,10 +44,7 @@ abstract class ApiHandler {
 			res.send(response.statusCode, response);
 			next();
 		} catch (error) {
-			console.log(`ApiHandler.handler: ERROR => ${JSON.stringify(error, null, 2)}`);
-
 			const response: ApiResponse = this.responseMapper.mapErrorToApiResponse(error);
-
 			res.send(response.statusCode, response);
 			next();
 		}

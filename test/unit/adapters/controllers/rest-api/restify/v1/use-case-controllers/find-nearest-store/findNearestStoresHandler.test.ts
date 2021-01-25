@@ -211,7 +211,7 @@ describe("FindNearestStoresHandler", () => {
 
 			const responseMapper = {
 					statusCode: StatusCodes.BAD_REQUEST,
-					error: new ResponseError(StatusCodes.BAD_REQUEST, "Both geographic coordinates should be provided")
+					error: "Both geographic coordinates should be provided"
 				};
 
 			const spyOnMockController = jest.spyOn(MockController.prototype, "execute");
@@ -231,8 +231,5 @@ describe("FindNearestStoresHandler", () => {
 			expect(spyOnMockMapperError).toHaveBeenCalled();
 			expect(spyOnResponseSend).toHaveBeenCalledWith(400, responseMapper);
 		});
-
-
 	});
-
 });

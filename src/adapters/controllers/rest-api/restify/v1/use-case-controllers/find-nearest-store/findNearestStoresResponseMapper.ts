@@ -16,7 +16,7 @@ export default class FindNearestStoresResponseMapper implements ResponseMapper {
 	mapErrorToApiResponse(error: BaseException): ApiResponse {
 		return {
 			statusCode: StatusCodes.BAD_REQUEST,
-			error: new ResponseError(StatusCodes.BAD_REQUEST, error.message)
+			error: error.message
 		};
 	}
 }

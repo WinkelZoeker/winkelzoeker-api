@@ -10,6 +10,8 @@ import InternalServerException from '../../../../../../controllers/exceptions/in
 import { Controller } from '../../../../../../controllers/rest-api/abstractController';
 import ResponseMapper from '../../../../../interfaces/responseMapper';
 import FindNearestStoresResponseMapper from './findNearestStoresResponseMapper';
+import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findNearestStoresUseCase';
+import StoreMongoRepository from '../../../../../../repository/storeMongoRepository';
 
 /** For clarity concerns, renaming logicalXOR => oneCoordinateElementMissing */
 import oneCoordinateElementMissing from '../../../../../../../lib/logicalXOR';
@@ -26,8 +28,6 @@ export class FindNearestStoresHandler extends ApiHandler {
 		const latitude = queryParams.hasOwnProperty('latitude') ? queryParams['latitude'] : undefined;
 		const longitude = queryParams.hasOwnProperty('longitude') ? queryParams['longitude'] : undefined;
 		const limit = queryParams.hasOwnProperty('limit') ? queryParams['limit'] : undefined;
-
-		console.log(`FindNearestStoresHandler.validateRequest:queryParams => ${JSON.stringify(queryParams, null, 2)}`);
 
 		// TODO: Stack errors if time permits/get an out of the box validator for restify
 		if (latitude && isNaN(latitude)) {
@@ -48,7 +48,6 @@ export class FindNearestStoresHandler extends ApiHandler {
 
 	protected async execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse> {
 
-		console.log(`REQUEST.query => ${JSON.stringify(req.query, null, 2)}`)
 		try {
 			const latitude = req.query.hasOwnProperty('latitude') ? req.query['latitude'] : undefined;
 			const longitude = req.query.hasOwnProperty('longitude') ? req.query['longitude'] : undefined;
@@ -67,8 +66,12 @@ export class FindNearestStoresHandler extends ApiHandler {
 	}
 }
 
+
 export default (logger: Logger, apiVersion: string): ApiHandler =>
-	new FindNearestStoresHandler(new FindNearestStoresController({}),
+	new FindNearestStoresHandler(
+		new FindNearestStoresController(
+			new FindNearestStoresUseCase(
+				new StoreMongoRepository())),
 	new FindNearestStoresResponseMapper(),
 	logger,
 	apiVersion);
