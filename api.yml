@@ -1,0 +1,107 @@
+openapi: 3.0.1
+info:
+  title: WinkelZoeker API
+  description: WinkelZoeker API project
+  version: 0.1.9
+servers:
+  - url: http://localhost:3000
+    description: Local server
+  - url: http://api.example.com/v1
+    description: Optional server description, e.g. Main (production) server
+  - url: http://staging-api.example.com
+    description: Optional server description, e.g. Internal staging server for testing
+paths:
+  /stores:
+    get:
+      summary: Returns a list of stores.
+      description: If geographic position is supplied, the nearest stores will be returned
+      operationId: listStores
+      tags:
+        - stores
+      parameters:
+        - name: latitude
+          in: query
+          description: Geographic Latitude in Decimal degrees
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: longitude
+          in: query
+          description: Geographic Latitude in Decimal degrees
+          required: false
+          schema:
+            type: number
+            format: float
+        - name: limit
+          in: query
+          description: How many items to return at one time
+          required: false
+          schema:
+            type: integer
+            format: int32
+      responses:
+        '200':    # status code
+          description: A JSON array of user names
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  "$ref": "#/components/schemas/Store"
+
+components:
+  schemas:
+    Store:
+      type: object
+      properties:
+        city:
+          type: string
+          example: Aalsmeer
+        postalCode:
+          type: string
+          example: 1431 HN
+        street:
+          type: string
+          example: Ophelialaan
+        street2:
+          type: string
+          example: 124
+        street3:
+          type: string
+          example: Building
+        addressName:
+          type: string
+          example: Jumbo Aalsmeer Ophelialaan
+        uuid:
+          type: string
+          example: gssKYx4XJwoAAAFbn.BMqPTb
+        longitude:
+          type: number
+          format: float
+          example: 4.762433
+        latitude:
+          type: number
+          format: float
+          example: 52.264417
+        complexNumber:
+          type: string
+          example: 33010
+        showWarningMessage:
+          type: boolean
+          example: false
+        todayOpen:
+          type: string
+          example: 08:00
+        locationType:
+          type: string
+          example: SupermarktPuP
+        collectionPoint:
+          type: boolean
+          example: true
+        sapStoreID:
+          type: string
+          example: 3178
+        todayClose:
+          type: string
+          example: 22:00
