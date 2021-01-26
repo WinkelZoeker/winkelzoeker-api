@@ -11,6 +11,9 @@ class FindNearestStoresController extends AbstractController {
   }
 
   public async execute(event: any, logger: Logger): Promise<UseCaseResponse> {
+
+		console.log(`FindNearestStoresController.execute, event = ${JSON.stringify(event, null, 2)}`);
+
 		const useCaseRequest: UseCaseRequest = {
 			limit: event.limit || 5
 		};

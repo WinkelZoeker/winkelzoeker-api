@@ -37,6 +37,9 @@ abstract class ApiHandler {
 	public handler = async (req: Request, res: Response, next: Next): Promise<void> => {
 
 		try {
+
+			this.logger.info(`ApiHandler.handler: request = ${JSON.stringify(req.query, null, 2)}`);
+
 			this.validateRequest(req.query);
 
 			const result: UseCaseResponse = await this.execute(req, res, next);
