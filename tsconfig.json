@@ -24,12 +24,14 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "outDir": "dist/",
-    "experimentalDecorators": true,
+    "rootDir": "./src",
+		"experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
     "./types/**/*",
     "./src/**/*",
     "./test/**/*"
-  ]
+  ],
+  "exclude": ["./node_modules", "./test/"]
 }
