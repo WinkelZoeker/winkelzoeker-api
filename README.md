@@ -16,7 +16,7 @@
 
 ### Build Status
 
-![Main Build](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Main%20Build/badge.svg)
+![Build image](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
 
 ### 🏠 [Homepage](https://github.com/WinkelZoeker/winkelzoeker-api#readme)
 
