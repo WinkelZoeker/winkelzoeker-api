@@ -1,0 +1,19 @@
+version: '3.1'
+
+services:
+  winkelzoeker-api:
+    image: winkelzoeker/winkelzoeker-api
+    container_name: 'winkelzoeker-api'
+    restart: always
+    ports:
+      - 3000:3000
+    environment:
+      - SERVER_PROTOCOL=http
+      - SERVER_HOSTNAME=localhost
+      - API_PORT=3000
+      - NODE_ENV=DEV
+      - BASE_URL=localhost
+      - MONGO_HOST=cluster0.dyuls.mongodb.net
+      - MONGO_DATABASE=winkelzoeker-database
+      - MONGO_USER=winkelzoeker_database-user
+      - MONGO_PASS=winkelzoeker_database-pwd
