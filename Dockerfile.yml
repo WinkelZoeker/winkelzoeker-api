@@ -1,6 +1,7 @@
 FROM node:latest
 
-WORKDIR /usr/src/app
+# WORKDIR /usr/src/app
+WORKDIR /winkelzoeker-api
 
 COPY package.json ./
 
