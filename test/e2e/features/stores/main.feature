@@ -1,12 +1,12 @@
-Feature: Create User
-	Clients should be able to send a request to our API in order to create a user. Our API should also validate the structure of the payload and respond with an error if it is invalid.
+Feature: Find nearest stores
+	Clients should be able to send a request to our API in order to get the nearest stores.
+	Our API should also validate the structure of the payload and respond with an error if it is invalid.
 
-	Scenario: Empty Payload
-		If the client sends a POST request to /users with a unsupported payload, it should receive a response with a 4xx status code.
+	Scenario: Empty Query params
+		If the client sends a GET request to /stores with an empty query stirng, it should receive a response with 5 stores
 
-		When the client creates a POST request to /users
-		And attaches a generic empty payload
+		When the client creates a GET request to /stores
+		And attaches an empty query string
 		And sends the request
-		Then our API should respond with a 400 HTTP status code
+		Then our API should respond with a 200 HTTP status code
 		And the payload of the response should be a JSON object
-		And contains a message property which says "Payload should not be empty"
