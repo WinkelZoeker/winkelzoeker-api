@@ -4,7 +4,7 @@
 
 import * as restify from 'restify';
 import * as restifyPlugins from 'restify-plugins';
-import ConsoleLogger from '../../../../../adapters/infrastructure/consoleLogger';
+import WebAppLogger from '../../../../../adapters/infrastructure/webApplogger';
 import { Logger } from '../../../../../usecases/ports/infrastructure';
 import config from './config';
 
@@ -15,7 +15,7 @@ import { registerRoutes } from './routes'
 /**
  * Initialize Logger
  */
-const logger: Logger = new ConsoleLogger();
+const logger: Logger = new WebAppLogger();
 
 
 /**

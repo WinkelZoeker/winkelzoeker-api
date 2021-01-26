@@ -3,7 +3,6 @@ import { Request, Response, Next } from 'restify';
 import { ApiHandler, HttpVerb } from '../../api-handler';
 import { ApiResponse } from '../../../../../models';
 import { FindNearestStoresController } from './findNearestStoresController';
-import ConsoleLogger from '../../../../../../infrastructure/consoleLogger';
 import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import BadRequestException from '../../../../../../controllers/exceptions/badRequestException';
 import InternalServerException from '../../../../../../controllers/exceptions/internalServerException';
@@ -59,7 +58,7 @@ export class FindNearestStoresHandler extends ApiHandler {
 				limit
 			};
 
-			return this.controller.execute(event, this.logger);
+			return this.controller.execute(event);
 		} catch (error) {
 			throw new InternalServerException(error.message);
 		}
@@ -67,11 +66,13 @@ export class FindNearestStoresHandler extends ApiHandler {
 }
 
 
-export default (logger: Logger, apiVersion: string): ApiHandler =>
-	new FindNearestStoresHandler(
-		new FindNearestStoresController(
-			new FindNearestStoresUseCase(
-				new StoreMongoRepository())),
-	new FindNearestStoresResponseMapper(),
-	logger,
-	apiVersion);
+export default (logger: Logger, apiVersion: string): ApiHandler =>{
+
+		const responseMapper: ResponseMapper = new FindNearestStoresResponseMapper();
+		const repository = new StoreMongoRepository();
+		const useCase = new FindNearestStoresUseCase(repository);
+		const controller = new FindNearestStoresController(useCase, logger);
+		const findNearestStoresHandler: ApiHandler = new FindNearestStoresHandler(controller, responseMapper, logger, apiVersion);
+
+		return findNearestStoresHandler;
+}

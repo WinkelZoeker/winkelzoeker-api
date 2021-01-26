@@ -10,7 +10,7 @@
     "test:all": "jest",
     "test:unit": "DEFAULT_ENVIRONMENT=DEV jest test/unit/**",
     "test:_e2e": "npx dotenv-extended -e ./test/unit/.DEV.env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",
-		"test:e2e": "npx cucumber-js \"./test/e2e/features/**/*.feature\" --require \"./test/e2e/steps/**/*.steps.ts\" --require-module ts-node/register",
+    "test:e2e": "npx cucumber-js \"./test/e2e/features/**/*.feature\" --require \"./test/e2e/steps/**/*.steps.ts\" --require-module ts-node/register",
     "test:coverage": "jest test/unit/** --coverage",
     "start:dev": "nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
     "start:restify": "npm run build; node ./dist/src/adapters/controllers/rest-api/restify/v1/index.js",
@@ -39,7 +39,8 @@
     "restify": "^8.5.1",
     "restify-errors": "^8.0.2",
     "restify-plugins": "^1.6.0",
-    "server-health": "^5.0.0"
+    "server-health": "^5.0.0",
+    "winston": "^3.3.3"
   },
   "devDependencies": {
     "@cucumber/cucumber": "^7.0.0",

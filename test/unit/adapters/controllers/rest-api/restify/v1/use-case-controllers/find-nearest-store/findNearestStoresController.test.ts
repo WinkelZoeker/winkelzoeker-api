@@ -52,8 +52,8 @@ describe("FindNearestStoresController", () => {
 
 			let result = {};
 			try {
-				const controller = new FindNearestStoresController(new MockUseCase());
-				result = await controller.execute(event, new ConsoleLogger());
+				const controller = new FindNearestStoresController(new MockUseCase(), new ConsoleLogger());
+				result = await controller.execute(event);
 			} catch (error) {
 				expect(false).toBeTruthy();
 			}

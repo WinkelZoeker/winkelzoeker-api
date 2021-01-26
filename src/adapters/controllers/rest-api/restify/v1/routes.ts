@@ -3,7 +3,6 @@ import { Server, Request, Response, Next, RouteOptions, RequestHandlerType, Rout
 
 import { handlers } from './use-case-controllers/handlers'
 import { ApiHandler, HttpVerb } from './api-handler';
-import ConsoleLogger from '../../../../infrastructure/consoleLogger';
 import { Logger } from '../../../../../usecases/ports/infrastructure';
 
 // const registers:{

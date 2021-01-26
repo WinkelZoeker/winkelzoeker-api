@@ -18,7 +18,9 @@ const apiVersion = 'v1';
 function next(object?: any): void { }
 
 class MockController extends AbstractController {
-	public execute(event: any, logger: Logger): Promise<UseCaseResponse> { throw new Error("Method not implemented."); }
+	public execute(event: any): Promise<UseCaseResponse> {
+		throw new Error("Method not implemented.");
+	}
 }
 
 export default class MockResponseMapper implements ResponseMapper {
@@ -38,7 +40,7 @@ describe("FindNearestStoresHandler", () => {
 	describe("execute", () => {
 		it("should NOT throw an exception with correct coordinates and limit provided", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				latitude: 1.0,
 				longitude: 1.0,
@@ -51,7 +53,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should NOT throw an exception with correct coordinates in string format and limit provided", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				latitude: '1.0',
 				longitude: '1.0',
@@ -64,7 +66,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should NOT throw an exception without any coordinates and limit provided", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				limit: 5
 			};
@@ -75,7 +77,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should throw an exception with only latitude provided (limit correctly provided)", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				latitude: 1.0,
 				limit: 5
@@ -87,7 +89,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should throw an exception with only longitude provided (limit correctly provided)", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				longitude: 1.0,
 				limit: 5
@@ -99,7 +101,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should throw an exception with one of the coordinates with wrong format (limit correctly provided)", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				latitude: 1.0,
 				longitude: "ABC",
@@ -112,7 +114,7 @@ describe("FindNearestStoresHandler", () => {
 
 		it("should throw an exception with limit in wrong format (coordinates correctly provided)", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
 				latitude: 1.0,
 				longitude: 1.0,
@@ -153,7 +155,7 @@ describe("FindNearestStoresHandler", () => {
 
 			try {
 				const findNearestStoresHandler: FindNearestStoresHandler =
-					new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+					new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 				await findNearestStoresHandler.handler(request, response, next);
 			} catch (error) {
 				expect(false).toBeTruthy();
@@ -188,7 +190,7 @@ describe("FindNearestStoresHandler", () => {
 
 			try {
 				const findNearestStoresHandler: FindNearestStoresHandler =
-					new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+					new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 				await findNearestStoresHandler.handler(request, response, next);
 			} catch (error) {
 				expect(false).toBeTruthy();
@@ -219,7 +221,7 @@ describe("FindNearestStoresHandler", () => {
 			const spyOnMockMapperError = jest.spyOn(MockResponseMapper.prototype, "mapErrorToApiResponse").mockReturnValue(responseMapper);
 			const spyOnResponseSend = jest.spyOn(response, "send");
 			const findNearestStoresHandler: FindNearestStoresHandler =
-				new FindNearestStoresHandler(new MockController(), new MockResponseMapper(), logger, apiVersion);
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 
 			try {
 				await findNearestStoresHandler.handler(request, response, next);

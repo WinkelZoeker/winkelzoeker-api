@@ -38,7 +38,7 @@ abstract class ApiHandler {
 
 		try {
 
-			this.logger.info(`ApiHandler.handler: request = ${JSON.stringify(req.query, null, 2)}`);
+			this.logger.info(`ApiHandler.handler: request = ${JSON.stringify(req.query)}`);
 
 			this.validateRequest(req.query);
 

@@ -6,13 +6,13 @@ import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findN
 import GeoLocation from '../../../../../../../core/geoLocation';
 
 class FindNearestStoresController extends AbstractController {
-  constructor(private useCase: UseCase) {
-    super();
+  constructor(private useCase: UseCase, logger: Logger) {
+    super(logger);
   }
 
-  public async execute(event: any, logger: Logger): Promise<UseCaseResponse> {
+  public async execute(event: any): Promise<UseCaseResponse> {
 
-		console.log(`FindNearestStoresController.execute, event = ${JSON.stringify(event, null, 2)}`);
+		this.logger.info(`FindNearestStoresController.execute, event = ${JSON.stringify(event, null, 2)}`);
 
 		const useCaseRequest: UseCaseRequest = {
 			limit: event.limit || 5
