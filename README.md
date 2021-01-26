@@ -10,6 +10,10 @@
   <a href="https://github.com/WinkelZoeker/winkelzoeker-api/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/WinkelZoeker/winkelzoeker-api" />
   </a>
+
+  <a href="https://github.com/WinkelZoeker/winkelzoeker-api/actions?query=workflow%3A%22Main+Build%22" target="_blank">
+    <img alt="Main Build" src="https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Main%20Build/badge.svg" />
+  </a>
 </p>
 
 > WinkelZoeker backend API
