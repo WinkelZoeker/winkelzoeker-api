@@ -146,7 +146,21 @@ printlncolor '------------------------------------------------------------------
 curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=ABC"
 echo
 
+
+endpoint='stores'
+printlncolor '----------------------------------------------------------------------------------------------------------'
+printlncolor $endpoint
+printlncolor "Endpoint: ${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.4416&longitude=5.4697"
+printlncolor "Expected HTTP STATUS: 200 (OK)"
+printlncolor '----------------------------------------------------------------------------------------------------------'
+curl -i -H "Content-Type: application/json" -X GET "${_API_ADDRESS}/${apiVersion}/${endpoint}?latitude=51.4416&longitude=5.4697"
 echo
+
+
+echo
+
+
+
 
 
 echo
