@@ -10,7 +10,6 @@ COPY . .
 RUN npm i
 RUN npx tsc -p .
 
-
 COPY ./dist .
 
 EXPOSE 3000

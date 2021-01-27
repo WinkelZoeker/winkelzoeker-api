@@ -6,7 +6,9 @@
   "scripts": {
     "clean": "rm -rf node_modules/ reports/ .webpack/ ./dist ./coverage",
     "build": "tsc",
-    "build:prod": "npm clean; npm i; tsc",
+    "build:prod": "npm run clean; npm i; npx tsc",
+    "image:build": "docker build -t winkelzoeker/winkelzoeker-api -f Dockerfile.yml .",
+    "image:publish": "",
     "test:all": "jest",
     "test:unit": "DEFAULT_ENVIRONMENT=DEV jest test/unit/**",
     "test:_e2e": "npx dotenv-extended -e ./test/unit/.DEV.env cucumber-js -- test/e2e/features/**/*.feature --require-module ts-node/register --require ./test/e2e/steps/**/*.steps.ts",

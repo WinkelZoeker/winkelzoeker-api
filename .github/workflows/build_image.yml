@@ -40,7 +40,7 @@ jobs:
         node-version: '14'
     - name: Build the latest Docker image
       id: docker_build
-      run: docker build . --file Dockerfile.yml --tag winkelzoeker/winkelzoeker-api:latest
+      run: docker build . --file Dockerfile-GHA.yml --tag winkelzoeker/winkelzoeker-api:latest
 
     - name: Image digest
       run: echo ${{ steps.docker_build.outputs.digest }}
