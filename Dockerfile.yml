@@ -20,7 +20,8 @@ FROM node:latest
 WORKDIR /usr/src/app
 COPY package*.json ./
 COPY . .
-RUN npm run build:prod
+# RUN npm run build:prod
+RUN npx tsc -p .
 
 ## this is stage two , where the app actually runs
 
