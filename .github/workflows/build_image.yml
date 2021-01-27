@@ -30,7 +30,7 @@ jobs:
     #     image-name: winkelzoeker/winkelzoeker-api # Provide Docker image name
     #     image-tag: head # Provide Docker image tag
     #     dockerfile: Dockerfile.yml
-
+  build:
     - name: Build the latest Docker image
       id: docker_build
       run: docker build . --file Dockerfile.yml --tag winkelzoeker/winkelzoeker-api:latest
