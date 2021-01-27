@@ -30,10 +30,10 @@ jobs:
     #     image-name: winkelzoeker/winkelzoeker-api # Provide Docker image name
     #     image-tag: head # Provide Docker image tag
     #     dockerfile: Dockerfile.yml
-    - name: Get the version
-      id: vars
-      run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
-    - name: Build the tagged Docker image
-      run: docker build . --file Dockerfile.yml --tag winkelzoeker/winkelzoeker-api:${{steps.vars.outputs.tag}}
+
     - name: Build the latest Docker image
+      id: docker_build
       run: docker build . --file Dockerfile.yml --tag winkelzoeker/winkelzoeker-api:latest
+
+    - name: Image digest
+      run: echo ${{ steps.docker_build.outputs.digest }}
