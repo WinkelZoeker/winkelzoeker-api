@@ -19,7 +19,8 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "lib": [
-      "ESNext"
+      "ESNext",
+      "es2018"
     ],
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
