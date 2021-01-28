@@ -76,13 +76,19 @@ do
                 ;;
 
 		-e | --encrypt) 
-                        shift
-                        _OPERATION='encrypt' 
+                if [[ "$_OPERATION" = "decrypt" ]]; then
+                    printlncolorERROR "You can not choose two operations. Exiting..."
+                    exit -1
+                fi
+                _OPERATION='encrypt' 
                 ;;
 
-		-d | --decrypt) 
-                        shift
-                        _OPERATION='decrypt' 
+		-d | --decrypt)
+                if [[ "$_OPERATION" = "encrypt" ]]; then
+                    printlncolorERROR "You can not choose two operations. Exiting..."
+                    exit -1
+                fi
+                _OPERATION='decrypt' 
                 ;;
 
 		-h | --help)
@@ -126,12 +132,11 @@ fi
 
 if [ "$_OPERATION" = "encrypt" ]; then
     printlncolor "Encrypting..."
-    # gpg --quiet --batch --yes --decrypt --passphrase="$ENCRYPTION_KEY" --output ../data/stores.js ../data/stores.js.gpg
-    echo gpg --quiet --batch --yes --encrypt --passphrase="$_KEY" --output ${_SECRET_FILE}.gpg ${_SECRET_FILE} 
+    gpg --symmetric --batch --passphrase "$_KEY" --cipher-algo AES256 ${_SECRET_FILE}
     exit 0
 elif [ "$_OPERATION" = "decrypt" ]; then
     printlncolor "Decrypting..."
-    echo gpg --quiet --batch --yes --decrypt --passphrase="$_KEY" --output ${_SECRET_FILE}.dec ${_SECRET_FILE}
+    gpg --quiet --batch --yes --decrypt --passphrase="$_KEY" --output ${_SECRET_FILE}.decrypted ${_SECRET_FILE}
     exit 0
 else
     echo "$USE_MESSAGE"
