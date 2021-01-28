@@ -23,10 +23,30 @@ jobs:
     # - name: Code coverage
     #   run: npm run test:coverage
 
-    - name: Build and Publish Multi stage Docker image (head)
-      uses: VaultVulp/gp-docker-action@1.1.7
-      with:
-        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
-        image-name: winkelzoeker.api # Provide Docker image name
-        image-tag: head # Provide Docker image tag
-        dockerfile: Dockerfile-MS.yml
+    # - name: Build and Publish Multi stage Docker image (head)
+    #   uses: VaultVulp/gp-docker-action@1.1.7
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+    #     image-name: winkelzoeker.api # Provide Docker image name
+    #     image-tag: head # Provide Docker image tag
+    #     dockerfile: Dockerfile-MS.yml
+
+    # - name: Build and Publish Multi stage Docker image (date tagged)
+    #   uses: VaultVulp/gp-docker-action@1.1.7
+    #   with:
+    #     github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+    #     image-name: winkelzoeker.api # Provide Docker image name
+    #     image-tag: $(date +%s)
+    #     dockerfile: Dockerfile-MS.yml
+
+    - name: docker login
+        env:
+          DOCKER_USER: ${{secrets.DOCKER_USER}}
+          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+
+    - name: Build and Publish Multi stage Docker image to DockerHub (tag:head)
+      run: docker build . --file Dockerfile-MS.yml --tag winkelzoeker/winkelzoeker.api:head
+      
+    - name: Docker Push
+      run: docker push winkelzoeker/winkelzoeker.api
