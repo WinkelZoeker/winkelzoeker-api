@@ -1,4 +1,5 @@
 FROM node:14-alpine AS winkelzoeker-api-builder
+
 WORKDIR /usr/src/app
 
 RUN npm uninstall -g tsc
@@ -17,8 +18,8 @@ RUN npm install pm2 -g
 
 WORKDIR /app
 
-COPY --from=winkelzoeker-api-builder ./app/dist ./dist
+COPY --from=winkelzoeker-api-builder /usr/src/app/dist ./dist
 COPY package* ./
 RUN npm install --production
 EXPOSE 3000
-CMD ["pm2-runtime","./dist/adapters/controllers/rest-api/restify/v1/index.js"]
+CMD ["pm2-runtime","/usr/src/app/dist/adapters/controllers/rest-api/restify/v1/index.js"]

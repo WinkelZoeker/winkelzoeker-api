@@ -1,4 +1,4 @@
-name: "Build image"
+name: "Build image via multi staged docker"
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
     # - name: Code coverage
     #   run: npm run test:coverage
 
-    - name: Build and Publish head Docker image
+    - name: Build and Publish head Docker image (multi stage)
       uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
