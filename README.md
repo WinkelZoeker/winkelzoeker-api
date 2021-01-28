@@ -18,7 +18,7 @@
 
 ![Build image](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
 
-![Docker](https://img.shields.io/docker/image-size/winkelzoeker/winkelzoeker.api?label=DockerHub&style=for-the-badge)
+![Docker](https://img.shields.io/docker/image-size/winkelzoeker/winkelzoeker.api?label=DockerHub)
 
 
 
