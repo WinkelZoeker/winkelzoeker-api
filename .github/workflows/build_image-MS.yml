@@ -23,24 +23,18 @@ jobs:
     # - name: Code coverage
     #   run: npm run test:coverage
 
-    - name: Build and Publish head Docker image (multi stage)
+    - name: Build and Publish Multi stage Docker image (head)
       uses: VaultVulp/gp-docker-action@1.1.7
       with:
         github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
         image-name: winkelzoeker.api # Provide Docker image name
-        image-tag: latest # Provide Docker image tag
+        image-tag: head # Provide Docker image tag
         dockerfile: Dockerfile-MS.yml
-  # build:
-  #   runs-on: ubuntu-latest
-  #   steps:
-  #   - uses: actions/checkout@v2
-  #   - name: Set up Node 14
-  #     uses: actions/setup-node@v2
-  #     with:
-  #       node-version: '14'
-  #   - name: Build the latest Docker image
-  #     id: docker_build
-  #     run: docker build . --file Dockerfile-GHA.yml --tag winkelzoeker/winkelzoeker-api:latest
 
-  #   - name: Image digest
-  #     run: echo ${{ steps.docker_build.outputs.digest }}
+    - name: Build and Publish Multi stage Docker image (git tag)
+      uses: VaultVulp/gp-docker-action@1.1.7
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }} # Provide GITHUB_TOKEN to login into the GitHub Packages
+        image-name: winkelzoeker.api # Provide Docker image name
+        extract-git-tag: true
+        dockerfile: Dockerfile-MS.yml        
