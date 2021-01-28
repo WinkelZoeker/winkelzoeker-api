@@ -10,15 +10,16 @@
   <a href="https://github.com/WinkelZoeker/winkelzoeker-api/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/github/license/WinkelZoeker/winkelzoeker-api" />
   </a>
+  <a href="https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/docker/image-size/winkelzoeker/winkelzoeker.api?label=DockerHub" />
+  </a>
 </p>
 
 > WinkelZoeker backend API
 
 ### Build Status
 
-![Build image](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
-
-![Docker](https://img.shields.io/docker/image-size/winkelzoeker/winkelzoeker.api?label=DockerHub)
+![Build](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
 
 
 
