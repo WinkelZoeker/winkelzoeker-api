@@ -3,6 +3,7 @@ src/**/*.js
 src/**/*.map
 reports/
 test/unit/*.env
+secrets/*.env
 
 
 # Logs
