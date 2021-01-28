@@ -40,10 +40,10 @@ jobs:
     #     dockerfile: Dockerfile-MS.yml
 
     - name: docker login
-        env:
-          DOCKER_USER: ${{secrets.DOCKER_USER}}
-          DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-        run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
+      env:
+        DOCKER_USER: ${{secrets.DOCKER_USER}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: docker login -u $DOCKER_USER -p $DOCKER_PASSWORD 
 
     - name: Build and Publish Multi stage Docker image to DockerHub (tag:head)
       run: docker build . --file Dockerfile-MS.yml --tag winkelzoeker/winkelzoeker.api:head
