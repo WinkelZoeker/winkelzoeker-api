@@ -39,7 +39,7 @@ jobs:
     #     image-tag: $(date +%s)
     #     dockerfile: Dockerfile-MS.yml
 
-    - name: docker login
+    - name: DockerHub login
       env:
         DOCKER_USER: ${{secrets.DOCKER_USER}}
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}

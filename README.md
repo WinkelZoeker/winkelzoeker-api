@@ -18,6 +18,10 @@
 
 ![Build image](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
 
+![Docker](https://img.shields.io/docker/image-size/winkelzoeker/winkelzoeker.api?label=DockerHub&style=for-the-badge)
+
+
+
 ### 🏠 [Homepage](https://github.com/WinkelZoeker/winkelzoeker-api#readme)
 
 ## Install
@@ -34,6 +38,14 @@ Environment variables:
 ```sh
 npm run test
 ```
+
+## VSCode remarks
+
+* If docker 'dies' between sessions, run 'sudo dockerd'
+
+## Docker Hub
+
+* https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api
 
 ## Author
 

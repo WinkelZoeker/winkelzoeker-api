@@ -17,6 +17,8 @@
     "start:dev": "nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
     "start:restify": "npm run build; node ./dist/src/adapters/controllers/rest-api/restify/v1/index.js",
     "start": "source ./test/unit/.DEV.env; nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
+    "stack:up": "./bin/stack-up.sh",
+    "stack:down": "./bin/stack-down.sh",
     "start:restify:dev": "nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
     "start:restify:clean": "npm run build:prod; node ./dist/src/adapters/controllers/rest-api/restify/v1/index.js"
   },
