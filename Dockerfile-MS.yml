@@ -22,4 +22,4 @@ COPY --from=winkelzoeker-api-builder /usr/src/app/dist ./dist
 COPY package* ./
 RUN npm install --production
 EXPOSE 3000
-CMD ["pm2-runtime","/usr/src/app/dist/adapters/controllers/rest-api/restify/v1/index.js"]
+CMD ["pm2-runtime","/app/dist/adapters/controllers/rest-api/restify/v1/index.js"]
