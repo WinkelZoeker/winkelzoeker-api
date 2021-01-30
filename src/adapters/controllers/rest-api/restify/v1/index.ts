@@ -31,6 +31,19 @@ const server = restify.createServer({
 /**
 	* Middleware
 	*/
+logger.info(`INITIALIZING CORS MIDDLEWARE`);
+
+const cors = corsMiddleware({
+	preflightMaxAge: 5,
+	origins: ['*'],
+	allowHeaders:[],
+	exposeHeaders:[]
+});
+	
+server.pre(cors.preflight);  
+server.use(cors.actual);  
+	
+	
 logger.info(`INITIALIZING MIDDLEWARE`);
 server.use(restifyPlugins.jsonBodyParser({ mapParams: true }));
 server.use(restifyPlugins.acceptParser(server.acceptable));
@@ -42,16 +55,6 @@ server.use(restifyPlugins.fullResponse());
 // 	allowHeaders: ["Authorization"],
 // 	exposeHeaders: ["Authorization"]
 // });
-
-var cors = corsMiddleware({
-	preflightMaxAge: 5,
-	origins: ['*'],
-	allowHeaders:[],
-	exposeHeaders:[]
-});
-
-server.pre(cors.preflight);  
-server.use(cors.actual);  
 
 registerMiddleware(server, logger);
 
