@@ -37,11 +37,19 @@ server.use(restifyPlugins.acceptParser(server.acceptable));
 server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 
-const cors = corsMiddleware({  
-	origins: ["*"],
-	allowHeaders: [],
-	exposeHeaders: []
+// const cors = corsMiddleware({  
+// 	origins: ["*"],
+// 	allowHeaders: ["Authorization"],
+// 	exposeHeaders: ["Authorization"]
+// });
+
+var cors = corsMiddleware({
+	preflightMaxAge: 5,
+	origins: ['*'],
+	allowHeaders:[],
+	exposeHeaders:[]
 });
+
 server.pre(cors.preflight);  
 server.use(cors.actual);  
 
