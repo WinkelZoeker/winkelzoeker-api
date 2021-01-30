@@ -39,8 +39,8 @@ server.use(restifyPlugins.fullResponse());
 
 const cors = corsMiddleware({  
 	origins: ["*"],
-	allowHeaders: ["Authorization"],
-	exposeHeaders: ["Authorization"]
+	allowHeaders: [],
+	exposeHeaders: []
 });
 server.pre(cors.preflight);  
 server.use(cors.actual);  
