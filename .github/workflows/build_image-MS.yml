@@ -50,3 +50,7 @@ jobs:
       
     - name: Docker Push
       run: docker push winkelzoeker/winkelzoeker.api
+
+
+
+      

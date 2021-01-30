@@ -31,17 +31,23 @@ const server = restify.createServer({
 /**
 	* Middleware
 	*/
-logger.info(`INITIALIZING CORS MIDDLEWARE`);
-
 const cors = corsMiddleware({
 	preflightMaxAge: 5,
 	origins: ['*'],
-	allowHeaders:[],
-	exposeHeaders:[]
+	allowHeaders:['*'],
+	exposeHeaders:['*']
 });
-	
-server.pre(cors.preflight);  
-server.use(cors.actual);  
+
+logger.info(`INITIALIZING CORS MIDDLEWARE => ${JSON.stringify(cors, null, 2)}`);
+
+server.pre((req, res, next) => {
+	logger.info(`>>>>>>>> Fixing CORS`);
+	res.header("Access-Control-Allow-Origin", "*");
+	next();
+});
+
+// server.pre(cors.preflight);  
+// server.use(cors.actual);  
 	
 	
 logger.info(`INITIALIZING MIDDLEWARE`);
@@ -50,11 +56,10 @@ server.use(restifyPlugins.acceptParser(server.acceptable));
 server.use(restifyPlugins.queryParser({ mapParams: true }));
 server.use(restifyPlugins.fullResponse());
 
-// const cors = corsMiddleware({  
-// 	origins: ["*"],
-// 	allowHeaders: ["Authorization"],
-// 	exposeHeaders: ["Authorization"]
-// });
+server.on('MethodNotAllowed', function(req, res){
+	logger.info(`Method Not Allowed => ${JSON.stringify({req, res}, null, 2)}`);
+});
+
 
 registerMiddleware(server, logger);
 
