@@ -73,10 +73,10 @@ describe("StoreMongoRepository", () => {
 		});
 	});
 
-	describe("documentModel", () => {
+	describe("repositoryDocumentModel", () => {
 		it("should return an instance of mongoose.Model<Store>", async () => {
 			const repository = new StoreMongoRepository();
-			expect(repository.documentModel).toBeDefined();
+			expect(repository.repositoryDocumentModel).toBeDefined();
 		});
 	});
 });

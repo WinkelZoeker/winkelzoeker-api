@@ -44,7 +44,7 @@ export default class StoreMongoRepository extends AbstractMongoRepository<Store,
 		return new StoreModelMapper();
 	}
 
-	public get documentModel(): mongoose.Model<StoreDocument> {
+	public get repositoryDocumentModel(): mongoose.Model<StoreDocument> {
 		return storeModel;
 	}
 }
