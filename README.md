@@ -28,7 +28,7 @@
 ## Install
 
 
-First decrypt '.DEV.env' secrets into '.DEV.env.gpg.decrypted' and move it to '.DEV.env' using the <KEY> provided.
+First decrypt '.DEV.env' secrets into '.DEV.env.gpg.decrypted' and move it to '.DEV.env' using the KEY provided.
 
 ```sh
 $ ./bin/handle-secret.sh -f ./secrets/.DEV.env.gpg -d --key <KEY>
