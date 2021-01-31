@@ -36,19 +36,35 @@ $ mv ./secrets/.DEV.env.gpg.decrypted ./secrets/.DEV.env
 $ source ./secrets/.DEV.env
 ```
 
+Then 
+
 ```sh
 npm install
 ```
 
-
+For smoke testing, run the small script ./test/e2e_restify.sh to check if the service is online.
+```sh
+./test/e2e_restify.sh
+```
 
 ## Run tests
 
-Environment variables:
-	DEFAULT_ENVIRONMENT=[DEV]
+For the unit tests:
 
 ```sh
-npm run test
+npm run test:unit
+```
+
+For the integration tests, firs start the service in one shell window using npm:
+
+```sh
+npm run start
+```
+
+then run the tests on another shell (with .DEV.env loaded via source ./secrets/.DEV.env)
+
+```sh
+npm run test:e2e
 ```
 
 ## VSCode remarks
