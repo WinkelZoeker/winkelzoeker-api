@@ -1,17 +1,10 @@
-import * as errors from 'restify-errors';
+/* istanbul ignore file */
+
 import { Server, Request, Response, Next, RouteOptions, RequestHandlerType, Route } from 'restify';
 
 import { handlers } from './use-case-controllers/handlers'
 import { ApiHandler, HttpVerb } from './api-handler';
 import { Logger } from '../../../../../usecases/ports/infrastructure';
-
-// const registers:{
-// 	[index:string] : (opts: string | RegExp | RouteOptions, ...handlers: RequestHandlerType[]) => Route | boolean
-// } = {
-// 	'post': server.post.bind(server),
-// 	'get': server.get.bind(server)
-// };
-// console.debug(`REGISTERS => ${JSON.stringify(registers, null, 2)}`);
 
 const registerRoute = (server: Server, apiHandler: ApiHandler) => {
 	console.log(`MAPPING => ${JSON.stringify(apiHandler.endpoint, null, 2)}`);

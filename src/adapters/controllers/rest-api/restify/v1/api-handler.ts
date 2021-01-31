@@ -33,7 +33,6 @@ abstract class ApiHandler {
 		return `/${this.version}/${this._endpoint}`;
 	}
 
-
 	public handler = async (req: Request, res: Response, next: Next): Promise<void> => {
 
 		try {

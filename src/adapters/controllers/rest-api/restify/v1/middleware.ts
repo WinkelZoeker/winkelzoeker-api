@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 /** Lib does not provide type */
 const serverHealth = require('server-health');
 

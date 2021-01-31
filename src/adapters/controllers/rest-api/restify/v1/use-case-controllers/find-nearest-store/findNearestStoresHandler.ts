@@ -57,15 +57,14 @@ export class FindNearestStoresHandler extends ApiHandler {
 				longitude,
 				limit
 			};
-
 			return this.controller.execute(event);
 		} catch (error) {
 			throw new InternalServerException(error.message);
-		}
+		}git 
 	}
 }
 
-
+/* istanbul ignore next */
 export default (logger: Logger, apiVersion: string): ApiHandler =>{
 
 		const responseMapper: ResponseMapper = new FindNearestStoresResponseMapper();

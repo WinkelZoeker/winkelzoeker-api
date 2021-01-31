@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 const config = {
 	name: 'GENERIC API',
 	env: process.env.NODE_ENV || 'development',

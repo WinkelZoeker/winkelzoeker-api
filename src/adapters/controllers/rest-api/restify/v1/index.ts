@@ -41,15 +41,8 @@ const cors = corsMiddleware({
 });
 
 logger.info(`INITIALIZING CORS MIDDLEWARE => ${JSON.stringify(cors, null, 2)}`);
-
-server.pre((req, res, next) => {
-	logger.info(`>>>>>>>> Fixing CORS`);
-	res.header("Access-Control-Allow-Origin", "*");
-	next();
-});
-
-// server.pre(cors.preflight);  
-// server.use(cors.actual);  
+server.pre(cors.preflight);  
+server.use(cors.actual);  
 	
 	
 logger.info(`INITIALIZING MIDDLEWARE`);

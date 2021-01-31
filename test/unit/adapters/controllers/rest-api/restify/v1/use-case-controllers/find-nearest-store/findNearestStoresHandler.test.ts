@@ -12,6 +12,8 @@ import AbstractController from "../../../../../../../../../src/adapters/controll
 import ResponseMapper from "../../../../../../../../../src/adapters/controllers/interfaces/responseMapper"
 import BaseException from "../../../../../../../../../src/adapters/controllers/exceptions/baseException";
 import { ApiResponse, ResponseError } from "../../../../../../../../../src/adapters/controllers/models";
+import { InternalServerError } from "restify-errors";
+import InternalServerException from "../../../../../../../../../src/adapters/controllers/exceptions/internalServerException";
 
 const logger = new ConsoleLogger();
 const apiVersion = 'v1';
@@ -46,6 +48,8 @@ describe("FindNearestStoresHandler", () => {
 				longitude: 1.0,
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).not.toThrow(BadRequestException);
@@ -59,6 +63,8 @@ describe("FindNearestStoresHandler", () => {
 				longitude: '1.0',
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).not.toThrow(BadRequestException);
@@ -70,6 +76,8 @@ describe("FindNearestStoresHandler", () => {
 			const queryParams = {
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).not.toThrow(BadRequestException);
@@ -82,6 +90,8 @@ describe("FindNearestStoresHandler", () => {
 				latitude: 1.0,
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).toThrow(BadRequestException);
@@ -94,12 +104,14 @@ describe("FindNearestStoresHandler", () => {
 				longitude: 1.0,
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).toThrow(BadRequestException);
 		});
 
-		it("should throw an exception with one of the coordinates with wrong format (limit correctly provided)", async () => {
+		it("should throw an exception with Longitude with wrong format (limit correctly provided)", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
 				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
@@ -107,6 +119,23 @@ describe("FindNearestStoresHandler", () => {
 				longitude: "ABC",
 				limit: 5
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
+			expect(() => {
+				findNearestStoresHandler.validateRequest(queryParams)
+			}).toThrow(BadRequestException);
+		});
+
+		it("should throw an exception with Latitude with wrong format (limit correctly provided)", async () => {
+			const findNearestStoresHandler: FindNearestStoresHandler =
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
+			const queryParams = {
+				latitude: "ABC",
+				longitude: 1.0,
+				limit: 5
+			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).toThrow(BadRequestException);
@@ -120,6 +149,8 @@ describe("FindNearestStoresHandler", () => {
 				longitude: 1.0,
 				limit: 'X'
 			};
+
+			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
 			}).toThrow(BadRequestException);
@@ -233,5 +264,40 @@ describe("FindNearestStoresHandler", () => {
 			expect(spyOnMockMapperError).toHaveBeenCalled();
 			expect(spyOnResponseSend).toHaveBeenCalledWith(400, responseMapper);
 		});
+
+		it("should send a 500 error when an unexpected error ocurs", async () => {
+			var response = httpMocks.createResponse();
+			var request = httpMocks.createRequest({
+				method: 'GET',
+				url: '/search',
+				query: {
+					latitude: 5,
+					longitude: 5,
+					limit: 5
+				}
+			});
+			const message = 'MongoDB has run out of storage.';
+			const responseMapper = {
+					statusCode: StatusCodes.INTERNAL_SERVER_ERROR,
+					error: message
+				};
+
+			const spyOnMockController = jest.spyOn(MockController.prototype, "execute").mockRejectedValue(new Error(message));
+			const spyOnMockMapper = jest.spyOn(MockResponseMapper.prototype, "mapUseCaseResponseToApiResponse");
+			const spyOnMockMapperError = jest.spyOn(MockResponseMapper.prototype, "mapErrorToApiResponse").mockReturnValue(responseMapper);
+			const spyOnResponseSend = jest.spyOn(response, "send");
+
+			const findNearestStoresHandler: FindNearestStoresHandler =
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
+
+			await findNearestStoresHandler.handler(request, response, next);
+	
+			expect(spyOnMockController).toHaveBeenCalled();
+			expect(spyOnMockMapper).not.toHaveBeenCalled();
+			expect(spyOnMockMapperError).toHaveBeenCalled();
+			expect(spyOnResponseSend).toHaveBeenCalledWith(500, responseMapper);
+		});
+
+
 	});
 });
