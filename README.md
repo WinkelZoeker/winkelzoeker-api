@@ -27,9 +27,20 @@
 
 ## Install
 
+
+First decrypt '.DEV.env' secrets into '.DEV.env.gpg.decrypted' and move it to '.DEV.env' using the <KEY> provided.
+
+```sh
+$ ./bin/handle-secret.sh -f ./secrets/.DEV.env.gpg -d --key <KEY>
+$ mv ./secrets/.DEV.env.gpg.decrypted ./secrets/.DEV.env
+$ source ./secrets/.DEV.env
+```
+
 ```sh
 npm install
 ```
+
+
 
 ## Run tests
 

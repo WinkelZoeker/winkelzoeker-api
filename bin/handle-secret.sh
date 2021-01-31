@@ -44,7 +44,7 @@ It allows the developer to commit secrets to Github without compromising credent
 
 Usage: $(basename "$0") [OPTIONS]
 
-OPTIONS:
+OPTIONS:    
   -f, --file        Sets the file to encrypt/decrypt
   -e, --encrypt     Sets the operation to encrypt
   -d, --decrypt     Sets the operation to decrypt
