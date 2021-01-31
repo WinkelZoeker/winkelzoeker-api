@@ -6,10 +6,6 @@ info:
 servers:
   - url: http://localhost:3000
     description: Local server
-  - url: http://api.example.com/v1
-    description: Optional server description, e.g. Main (production) server
-  - url: http://staging-api.example.com
-    description: Optional server description, e.g. Internal staging server for testing
 paths:
   /stores:
     get:

@@ -10,7 +10,7 @@ module.exports = {
   collectCoverageFrom: ["src/**/*.{js,jsx.,ts}"],
   coverageDirectory: "./reports",
   coveragePathIgnorePatterns: ["<rootDir>/node_modules/, <rootDir>/build/"],
-  coverageReporters: ["json", "text", ["lcov", { projectRoot: "../../" }]],
+  coverageReporters: ["json", "text", "html", ["lcov", { projectRoot: "../../" }]],
   coverageThreshold: {
     global: {
       branches: 80,
