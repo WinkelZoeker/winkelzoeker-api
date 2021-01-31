@@ -62,9 +62,6 @@ describe("AbstractMongoRepository", () => {
 				AbstractMongoRepository<MockModel, MockDocument, string> = new MockMongoRepository();
 
 			const result = repository.findAll();
-			
-			console.log(`result => ${JSON.stringify(result, null, 2)}`);
-			
 		});
 
 	// 	it("should return a collection", async () => {
