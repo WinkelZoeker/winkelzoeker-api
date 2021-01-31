@@ -20,8 +20,8 @@ jobs:
       run: npm i
     - name: Unit test
       run: npm run test:unit
-    # - name: Code coverage
-    #   run: npm run test:coverage
+    - name: Code coverage
+      run: npm run test:coverage
 
     # - name: Build and Publish Multi stage Docker image (head)
     #   uses: VaultVulp/gp-docker-action@1.1.7
