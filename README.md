@@ -42,7 +42,8 @@ Then
 npm install
 ```
 
-For smoke testing, run the small script ./test/e2e_restify.sh to check if the service is online.
+For smoke testing, run the small script ./test/e2e_restify.sh to check if the service is online after you start the service via npm run start (with the environment variables loaded)
+
 ```sh
 ./test/e2e_restify.sh
 ```
