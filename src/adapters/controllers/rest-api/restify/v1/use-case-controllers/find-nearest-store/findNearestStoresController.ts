@@ -22,7 +22,6 @@ class FindNearestStoresController extends AbstractController {
 			useCaseRequest.geoLocation = new GeoLocation(event.latitude, event.longitude);
 		}
 		const stores = await this.useCase.execute(useCaseRequest);
-
 		return {
       stores,
     } as UseCaseResponse;

@@ -11,6 +11,7 @@ export default class FindNearestStoresUseCase implements UseCase {
 
 	async execute(input: UseCaseRequest): Promise<Store[]> {
 		const mappedRecords = await this.storeRepository.findAll();
+
 		if(input.hasOwnProperty('geoLocation')) {
 			const mappedRecordsWithDistance = mappedRecords.map((record: Store) => {
 				const distanceKm: number =
@@ -22,7 +23,7 @@ export default class FindNearestStoresUseCase implements UseCase {
 			.sort((storeA, storeB) => storeA.distanceKm > storeB.distanceKm ? 1 : -1 )
 			.slice(0, input.limit);
 
-			return mappedRecordsWithDistance.sort((storeA, storeB) => storeA.distanceKm > storeB.distanceKm ? 1 : -1 );
+			return mappedRecordsWithDistance;
 		}
 		return mappedRecords.slice(0, input.limit);
 	}
