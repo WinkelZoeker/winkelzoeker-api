@@ -60,7 +60,7 @@ export class FindNearestStoresHandler extends ApiHandler {
 			return this.controller.execute(event);
 		} catch (error) {
 			throw new InternalServerException(error.message);
-		}git 
+		}
 	}
 }
 
