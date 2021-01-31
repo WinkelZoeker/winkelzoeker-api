@@ -3,7 +3,7 @@ import winston from 'winston';
 import { Logger } from "../../usecases/ports/infrastructure";
 
 export default class WebAppLogger implements Logger {
-	private logger: any;
+	public logger: any;
 
 	constructor() {
 		this.logger = winston.createLogger({

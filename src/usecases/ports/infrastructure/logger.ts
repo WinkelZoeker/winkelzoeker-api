@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export default interface Logger {
   debug(message: any, data?: any): void;
   info(message: any, data?: any): void;

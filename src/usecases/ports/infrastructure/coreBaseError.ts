@@ -14,15 +14,10 @@ interface ErrorObject {
 
 abstract class CoreBaseError extends Error {
   public stack: any;
-
   public reason: string;
-
   public data: any;
-
   public code: string;
-
   public diagnostics?: string;
-
   public severity: ErrorSeverity;
 
   constructor(errorObj: ErrorObject, data: any = {}) {

@@ -1,3 +1,5 @@
+/* istanbul ignore file */
+
 export default interface CRUDRepository<T, K> {
   findAll: () => Promise<T[]>;
   findByKey: (key: K) => Promise<T | undefined>;

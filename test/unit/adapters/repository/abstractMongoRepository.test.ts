@@ -4,6 +4,7 @@ import mongoose, { Document, Schema } from 'mongoose';
 import Store from "../../../../src/core/store";
 import AbstractMongoRepository from "../../../../src/adapters/repository/abstractMongoRepository";
 import ModelMapper from '../../../../src/adapters/repository/modelMapper';
+import mockingoose from 'mockingoose';
 
 interface MockModel {
 	key: string,
@@ -26,7 +27,7 @@ class MockModelMapper implements ModelMapper<MockModel> {
 
 class MockMongoRepository extends AbstractMongoRepository<MockModel, MockDocument, string> {
 	public get documentToCoreModelMapper(): ModelMapper<MockModel>  { throw new Error('Method not implemented.'); }
-	public get repositoryDocumentModel(): mongoose.Model<MockDocument>  { throw new Error('Method not implemented.'); }
+	public get repositoryDocumentModel(): mongoose.Model<MockDocument>  { return mockDocument }
 }
 
 const mockDocument =  mongoose.model<MockDocument>('MockDocument', mockSchema);
@@ -39,40 +40,56 @@ describe("AbstractMongoRepository", () => {
 		key: 'key 1',
 		field: 'field 1'
 	};
-	const mappedResult: MockModel = {
+	const _doc = {
+		_id: '507f191e810c19729de860ea',
 		key: 'key 1',
 		field: 'field 1'
 	};
 
 	describe("findAll", () => {
 
-    beforeAll(() => {
-			console.log(`#############################################################`);
-			mockDocument.find = jest.fn().mockResolvedValue([mockResult])
-		});
-
 		it("should return a collection", async () => {
-			const repository: 
-				AbstractMongoRepository<MockModel, MockDocument, string> = new MockMongoRepository();
-			
-		
-			// const spyOnMongoFind = 
-			// 	jest.spyOn(mongoose.model<MockDocument>('MockDocument', mockSchema).prototype, "find")
-			// 	.mockResolvedValue([mockResult]);
+			mockingoose(mockDocument).toReturn([_doc], 'find');
+
 			const spyOnGetDocumentModel = 
-				jest.spyOn(MockMongoRepository.prototype, "repositoryDocumentModel", "get").mockReturnValue(mockDocument);
+				jest.spyOn(MockMongoRepository.prototype, "repositoryDocumentModel", "get");
 			const spyOnGetMapper = 
 				jest.spyOn(MockMongoRepository.prototype, "documentToCoreModelMapper", "get").mockReturnValue(new MockModelMapper());
 			const spyOnMapping = 
-				jest.spyOn(MockModelMapper.prototype, "mapToCoreModel").mockReturnValue(mappedResult);
+				jest.spyOn(MockModelMapper.prototype, "mapToCoreModel").mockReturnValue(mockResult);
+
+			const repository: 
+				AbstractMongoRepository<MockModel, MockDocument, string> = new MockMongoRepository();
 
 			const result = repository.findAll();
-
-			// expect(spyOnMongoFind).toBeCalled();
-			expect(spyOnGetMapper).toBeCalled();
-			expect(spyOnMapping).toBeCalled();
-
+			
+			console.log(`result => ${JSON.stringify(result, null, 2)}`);
+			
 		});
+
+	// 	it("should return a collection", async () => {
+			
+		
+	// 		// const spyOnMongoFind = 
+	// 		// 	jest.spyOn(mongoose.model<MockDocument>('MockDocument', mockSchema).prototype, "find")
+	// 		// 	.mockResolvedValue([mockResult]);
+	// 		const spyOnGetDocumentModel = 
+	// 			jest.spyOn(MockMongoRepository.prototype, "repositoryDocumentModel", "get").mockReturnValue(mockDocument);
+	// 		const spyOnGetMapper = 
+	// 			jest.spyOn(MockMongoRepository.prototype, "documentToCoreModelMapper", "get").mockReturnValue(new MockModelMapper());
+	// 		const spyOnMapping = 
+	// 			jest.spyOn(MockModelMapper.prototype, "mapToCoreModel").mockReturnValue(mappedResult);
+
+	// 		const repository: 
+	// 			AbstractMongoRepository<MockModel, MockDocument, string> = new MockMongoRepository();
+
+	// 		const result = repository.findAll();
+
+	// 		// expect(spyOnMongoFind).toBeCalled();
+	// 		expect(spyOnGetMapper).toBeCalled();
+	// 		expect(spyOnMapping).toBeCalled();
+
+	// 	});
 	});
 	describe("findByKey", () => {
 		it("should yada yada yada...", async () => {
