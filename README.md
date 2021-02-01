@@ -156,7 +156,7 @@ A (really) small front end is provided as a separated application for testing th
 
 ## Running using docker-compose stack
 
-It is also possible to run the full stack using a docker-compose file provided. It spins the api, the front end and the database locally, enabling the user to access the front end without dependencies other that Docker hub.
+It is also possible to run the full stack using a docker-compose file provided. It spins the api and the front end locally (although the database is still via MongoDB Atlas), enabling the user to access the front end without dependencies other that DockerHub and the database.
 
 First decrypt `.DEV.docker.env` secrets into `.DEV.docker.env.gpg.decrypted` and move it to `.DEV.docker.env` using the `KEY` provided, as done before. 
 
