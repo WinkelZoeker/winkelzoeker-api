@@ -73,7 +73,29 @@ You can [try it](https://validator.swagger.io/?url=https://raw.githubusercontent
 
 >http://127.0.0.1:3000/v1/stores?latitude={double}&longitude={double}
 
-This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates.
+This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like:
+
+```json
+[
+  {
+    "city": "Aalsmeer",
+    "postalCode": "1431 HN",
+    "street": "Ophelialaan",
+    "street2": 124,
+    "street3": "Building",
+    "addressName": "Jumbo Aalsmeer Ophelialaan",
+    "uuid": "gssKYx4XJwoAAAFbn.BMqPTb",
+    "longitude": 4.762433,
+    "latitude": 52.264417,
+    "complexNumber": 33010,
+    "showWarningMessage": false,
+    "todayOpen": "08:00",
+    "locationType": "SupermarktPuP",
+    "collectionPoint": true,
+    "sapStoreID": 3178,
+    "todayClose": 1320
+  }
+]```
 
 ### Versioning
 
