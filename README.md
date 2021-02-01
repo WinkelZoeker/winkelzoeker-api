@@ -25,10 +25,43 @@
 
 ### 🏠 [Homepage](https://github.com/WinkelZoeker/winkelzoeker-api#readme)
 
-## Install
+
+This API provides one endpoint to get the nearest stores based on geographic coordinates given in decimal degrees.
+
+To calculate the distance between two coordinates, it is necessary to rely on spherical trigonometry, using the [haversine distance formula](https://en.wikipedia.org/wiki/Haversine_formula).
+
+This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), whith the following structure:
+
+* core: core business structures, in this case, the Store and the GeoLocation.
+* usecases: The use cases implemented by this api, as well the infrasctructure interfaces that should be implemented via adapters. 
+* adapters: The outer layer, the 'dirtiest' part of the system. All technology related consideration are be addressed here.
 
 
-First decrypt '.DEV.env' secrets into '.DEV.env.gpg.decrypted' and move it to '.DEV.env' using the KEY provided.
+## Technologies
+
+- [NodeJs](https://nodejs.org/)
+- [Jest](https://www.docker.com)
+- [MongoDB](https://www.mongodb.com/)
+- [Restify](http://restify.com/)
+- [Winston](https://github.com/winstonjs/winston)
+- [Cucumber](https://cucumber.io/)
+- [Docker](https://www.docker.com/?)
+
+## Prerequisites
+
+- JDK 14
+- Maven 3.6 (or newer)
+- Port 3000 available (for Node serve API content)
+- External conection enabled to use external database via MongoDB Atlas.
+
+
+## Install and Running
+
+### Secrets handling
+
+The application relies on configurations set as environment variables. In order to inject those configurations, we provide an encrypted file containing all the configurations needed (otherwhise we would have to use a service like Hashicorpo Vault, or AWS Parameter Store/Secrets Manager).  
+
+First decrypt `.DEV.env` secrets into `.DEV.env.gpg.decrypted` and move it to `.DEV.env` using the `KEY` provided. This step should be done only once using the script `./bin/handle-secret.sh` provided.
 
 ```sh
 $ ./bin/handle-secret.sh -f ./secrets/.DEV.env.gpg -d --key <KEY>
@@ -36,37 +69,43 @@ $ mv ./secrets/.DEV.env.gpg.decrypted ./secrets/.DEV.env
 $ source ./secrets/.DEV.env
 ```
 
+### Install dependencies
+
 Then 
 
 ```sh
 npm install
 ```
 
-For smoke testing, run the small script ./test/e2e_restify.sh to check if the service is online after you start the service via npm run start (with the environment variables loaded)
-
-```sh
-./test/e2e_restify.sh
-```
-
-## Run tests
+### Unit tests
 
 For the unit tests:
 
 ```sh
 npm run test:unit
 ```
+### Integration/E2E testing
 
-For the integration tests, firs start the service in one shell window using npm:
+The integration/e2e tests, several `Gherkin` tests are provides using the BDD approach. In order to run those tests, first start the service in one shell window using npm:
 
 ```sh
 npm run start
 ```
 
-then run the tests on another shell (with .DEV.env loaded via source ./secrets/.DEV.env)
+then run the tests on another shell (with .DEV.env loaded via `source ./secrets/.DEV.env`)
 
 ```sh
-npm run test:e2e
+source ./secrets/.DEV.env && npm run test:e2e
 ```
+
+### Smoke test
+
+For smoke testing, run the small script `./test/e2e_restify.sh` to check if the service is online after you start the service via `npm run start` (with the environment variables loaded)
+
+```sh
+source ./secrets/.DEV.env && ./test/e2e_restify.sh
+```
+
 ## API Usage
 [OpenApi v3](api.yml) documentation is available.
 You can [try it](https://validator.swagger.io/?url=https://raw.githubusercontent.com/WinkelZoeker/winkelzoeker-api/main/api.yml) online
