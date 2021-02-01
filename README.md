@@ -67,6 +67,26 @@ then run the tests on another shell (with .DEV.env loaded via source ./secrets/.
 ```sh
 npm run test:e2e
 ```
+## API Usage
+[OpenApi v3](api.yml) documentation is available.
+You can [try it](https://validator.swagger.io/?url=https://raw.githubusercontent.com/WinkelZoeker/winkelzoeker-api/main/api.yml) online
+
+>http://127.0.0.1:3000/v1/stores?latitude={double}&longitude={double}
+
+This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates.
+
+### Versioning
+
+This API is versioned via url for practical purposes only. One possible refactor would be using **Media Type Versioning**, including the desired version on `Accept` header.
+
+### Coverage Report
+
+Code coverage report is located at `reports/index.html` and can be generated via the command
+
+```sh
+npm run test:coverage
+```
+
 
 ## VSCode remarks
 
@@ -74,7 +94,15 @@ npm run test:e2e
 
 ## Docker Hub
 
+The image is created using a Github Actions workflow. 
+Before publishing to DockerHub, the actions performs basic tasks such as unit tests and code coverage. 
+
 * https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api
+
+## Improvements
+* 1
+* 2
+* ...
 
 ## Author
 
