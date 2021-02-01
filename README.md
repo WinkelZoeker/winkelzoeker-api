@@ -55,7 +55,7 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 
 ## Install and Running
 
-### Secrets handling
+### Secrets handling and dependencies installation
 
 The application relies on configurations set as environment variables. In order to inject those configurations, we provide an encrypted file containing all the configurations needed (otherwhise we would have to use a service like Hashicorpo Vault, or AWS Parameter Store/Secrets Manager).  
 
@@ -66,8 +66,6 @@ $ ./bin/handle-secret.sh -f ./secrets/.DEV.env.gpg -d --key <KEY>
 $ mv ./secrets/.DEV.env.gpg.decrypted ./secrets/.DEV.env
 $ source ./secrets/.DEV.env
 ```
-
-### Install dependencies
 
 Then 
 
