@@ -95,7 +95,8 @@ This endpoint provides, by default,  the 5 closest stores on the database, order
     "sapStoreID": 3178,
     "todayClose": 1320
   }
-]```
+]
+```
 
 ### Versioning
 
