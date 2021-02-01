@@ -154,6 +154,27 @@ Before publishing to DockerHub, the actions performs basic tasks such as unit te
 
 A (really) small front end is provided as a separated application for testing the API. Please refer to [WinkelZoeker Front](https://github.com/WinkelZoeker/winkelzoeker-front) for instructions on how to run the application.
 
+## Running using docker-compose stack
+
+It is also possible to run the full stack using a docker-compose file provided. It spins the api, the front end and the database locally, enabling the user to access the front end without dependencies other that Docker hub.
+
+First decrypt `.DEV.docker.env` secrets into `.DEV.docker.env.gpg.decrypted` and move it to `.DEV.docker.env` using the `KEY` provided, as done before. 
+
+```sh
+$ ./bin/handle-secret.sh -f ./secrets/.DEV.docker.env.gpg -d --key <KEY>
+$ mv ./secrets/.DEV.docker.env.gpg.decrypted ./secrets/.DEV.docker.env
+```
+
+Then, just run 
+
+```sh
+npm run stack:full:up
+```
+ and point your browser to 
+ 
+ > http://localhost:8080/
+
+
 ## VSCode remarks
 
 * If docker 'dies' between sessions, run 'sudo dockerd'

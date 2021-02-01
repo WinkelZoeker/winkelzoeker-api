@@ -8,7 +8,6 @@
     "build": "tsc",
     "build:prod": "npm run clean; npm i; npx tsc",
     "image:build": "docker build -t winkelzoeker/winkelzoeker-api -f Dockerfile.yml .",
-    "image:publish": "",
     "test:all": "jest",
     "test:unit": "DEFAULT_ENVIRONMENT=DEV jest test/unit/**",
     "test:e2e": "npx cucumber-js \"./test/e2e/features/**/*.feature\" --require \"./test/e2e/steps/**/*.steps.ts\" --require-module ts-node/register",
@@ -18,6 +17,8 @@
     "start": "source ./secrets/.DEV.env; nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
     "stack:up": "docker-compose -f docker-compose.yml --env-file ./secrets/.DEV.docker.env up -d",
     "stack:down": "docker-compose -f docker-compose.yml down",
+    "stack:full:up": "docker-compose -f docker-compose-fe-be.yml --env-file ./secrets/.DEV.docker.env up -d",
+    "stack:full:down": "docker-compose -f docker-compose-fe-be.yml down",
     "start:restify:dev": "nodemon --config nodemon.json ./src/adapters/controllers/rest-api/restify/v1/index.ts",
     "start:restify:clean": "npm run build:prod; node ./dist/src/adapters/controllers/rest-api/restify/v1/index.js"
   },

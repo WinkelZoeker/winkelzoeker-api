@@ -17,15 +17,6 @@ services:
       - MONGO_DATABASE=${MONGO_DATABASE}
       - MONGO_USER=${MONGO_USER}
       - MONGO_PASS=${MONGO_PASS}
-    command: >
-      /bin/bash -c "
-        while ! nc -z web 3000;
-        do
-          echo sleeping;
-          sleep 1;
-        done;
-        echo Connected!;
-      "  
   winkelzoeker-front:
     image: winkelzoeker/winkelzoeker.front:head
     container_name: 'winkelzoeker-front'
@@ -33,5 +24,4 @@ services:
     ports:
       - 8080:8080
     depends_on:
-      - winkelzoeker-api      
-    command: 'nc -vz web 3000'
+      - winkelzoeker-api
