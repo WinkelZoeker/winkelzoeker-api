@@ -147,9 +147,12 @@ npm run test:coverage
 
 ## CICD pipeline
 
-The solution provides a pipeline (`.github/workflows/build_image-MS.yml`) which publishes a dockerized image to DockerHub[winkelzoeker repository](https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api).
+The solution provides a pipeline (`.github/workflows/build_image-MS.yml`) which publishes a dockerized image to DockerHub [WinkelZoeker repository](https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api).
 Before publishing to DockerHub, the actions performs basic tasks such as unit tests and code coverage. 
 
+## Front End
+
+A (really) small front end is provided as a separated application for testing the API. Please refer to [WinkelZoeker Front](https://github.com/WinkelZoeker/winkelzoeker-front) for instructions on how to run the application.
 
 ## VSCode remarks
 
