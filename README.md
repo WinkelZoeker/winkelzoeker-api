@@ -82,7 +82,7 @@ npm run test:unit
 ```
 ### Integration/E2E testing
 
-The integration/e2e tests, several `Gherkin` tests are provides using the BDD approach. In order to run those tests, first start the service in one shell window using npm:
+The integration/e2e tests, several `Gherkin` tests are provided using the BDD approach. In order to run those tests, first start the service in one shell window using npm:
 
 ```sh
 npm run start
@@ -108,7 +108,7 @@ You can [try it](https://validator.swagger.io/?url=https://raw.githubusercontent
 
 >http://127.0.0.1:3000/v1/stores?latitude={double}&longitude={double}
 
-This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like:
+This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like the excerpt bellow:
 
 ```json
 [
@@ -145,17 +145,16 @@ Code coverage report is located at `reports/index.html` and can be generated via
 npm run test:coverage
 ```
 
+## CICD pipeline
+
+The solution provides a pipeline (`.github/workflows/build_image-MS.yml`) which publishes a dockerized image to DockerHub[winkelzoeker repository](https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api).
+Before publishing to DockerHub, the actions performs basic tasks such as unit tests and code coverage. 
+
 
 ## VSCode remarks
 
 * If docker 'dies' between sessions, run 'sudo dockerd'
 
-## Docker Hub
-
-The image is created using a Github Actions workflow. 
-Before publishing to DockerHub, the actions performs basic tasks such as unit tests and code coverage. 
-
-* https://hub.docker.com/repository/docker/winkelzoeker/winkelzoeker.api
 
 ## Improvements
 * 1
