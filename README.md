@@ -34,7 +34,7 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 
 * core: core business structures, in this case, the Store and the GeoLocation.
 * usecases: The use cases implemented by this api, as well the infrasctructure interfaces that should be implemented via adapters. 
-* adapters: The outer layer, the 'dirtiest' part of the system. All technology related consideration are be addressed here.
+* adapters: The outer layer, the 'dirtiest' part of the system. All technology related considerations are addressed here.
 
 
 ## Technologies
@@ -49,11 +49,9 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 
 ## Prerequisites
 
-- JDK 14
-- Maven 3.6 (or newer)
+- Node 14
 - Port 3000 available (for Node serve API content)
 - External conection enabled to use external database via MongoDB Atlas.
-
 
 ## Install and Running
 
