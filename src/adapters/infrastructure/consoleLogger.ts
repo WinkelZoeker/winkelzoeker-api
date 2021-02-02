@@ -1,11 +1,11 @@
 import { Logger } from "../../usecases/ports/infrastructure";
 
 export default class ConsoleLogger implements Logger {
-  debug(message: any, data?: any): void {
+  debug(message: any, _data?: any): void {
     console.log(message);
   }
 
-  info(message: any, data?: any): void {
+  info(message: any, _data?: any): void {
     console.info(message);
   }
 

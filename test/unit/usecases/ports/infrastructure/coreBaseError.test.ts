@@ -11,7 +11,7 @@ const errorObj:  ErrorObject = {
 }
 
 class MockError extends CoreBaseError {
-	constructor(errorObj: ErrorObject, data: any = {}) {
+	constructor(errorObj: ErrorObject, _data: any = {}) {
 		super(errorObj, 'MockError data')
 	}
 }

@@ -16,11 +16,11 @@ export default class WebAppLogger implements Logger {
 		});
 	}
 
-	debug(message: any, data?: any): void {
+	debug(message: any, _data?: any): void {
 		this.logger.info(message);
 	}
 
-	info(message: any, data?: any): void {
+	info(message: any, _data?: any): void {
 		this.logger.info(message);
 	}
 

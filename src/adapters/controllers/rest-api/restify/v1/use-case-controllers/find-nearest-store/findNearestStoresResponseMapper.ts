@@ -1,6 +1,6 @@
 import { StatusCodes } from "http-status-codes";
 import BaseException from "../../../../../exceptions/baseException";
-import { ApiResponse, Resource, ResponseError } from "../../../../../models";
+import { ApiResponse } from "../../../../../models";
 import { UseCaseResponse } from "src/usecases/ports/infrastructure";
 import ResponseMapper from "../../../../../interfaces/responseMapper";
 

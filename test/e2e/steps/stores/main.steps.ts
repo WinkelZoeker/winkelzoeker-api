@@ -1,5 +1,5 @@
 import { StatusCodes } from 'http-status-codes';
-import { binding, given, then, when } from 'cucumber-tsflow';
+import { binding, then, when } from 'cucumber-tsflow';
 import superagent from 'superagent';
 import assert from 'assert';
 
@@ -15,13 +15,13 @@ export class StoresSteps {
 	private requestPayload: any;
 
 	@when(/the client creates a (GET) request to ([/\w-:.]+)$/)
-	public createPost(method: string, path: string) {
+	public createPost(method: string, path: string): void {
 		const serverUrl = `${process.env.SERVER_PROTOCOL}://${process.env.SERVER_HOSTNAME}:${process.env.API_PORT}${path}`;
 		this.request = superagent(method, serverUrl);
 	}
 
 	@when(/^attaches (.+) and (.+) as coordinates$/)
-	public attachCoordinates(latitude: string, longitude: string) {
+	public attachCoordinates(latitude: string, longitude: string): void {
 
 		if (latitude !== 'empty') {
 			this.request.query({ latitude })
@@ -29,11 +29,11 @@ export class StoresSteps {
 		if (longitude !== 'empty') {
 			this.request.query({ longitude })
 		}
-	};
+	}
 
 
 	@when(/^attaches the coordinates of (.+) and (.+) as coordinates from (.+)$/)
-	public attachCoordinatesWithCity(latitude: string, longitude: string, city: string) {
+	public attachCoordinatesWithCity(latitude: string, longitude: string, _city: string): void {
 
 		if (latitude !== 'empty') {
 			this.request.query({ latitude })
@@ -41,18 +41,18 @@ export class StoresSteps {
 		if (longitude !== 'empty') {
 			this.request.query({ longitude })
 		}
-	};
+	}
 
 
 	@when(/^attaches a limit of (.+) records$/)
-	public attachLimit(limit: string) {
+	public attachLimit(limit: string): void {
 		if (limit !== 'empty') {
 			this.request.query({ limit })
 		}
-	};
+	}
 
 	@when(/^sends the request$/)
-	public sendRequest(callback: () => void) {
+	public sendRequest(callback: () => void): void {
 		this.request
 			.then((response: any) => {
 				this.response = response.res;
@@ -65,7 +65,7 @@ export class StoresSteps {
 	}
 
 	@then(/^our API should respond with a ([1-5]\d{2}) HTTP status code$/)
-	public checkHTTPResponse(statusCode: number) {
+	public checkHTTPResponse(statusCode: number): void {
 		assert.notStrictEqual(this.response, undefined);
 		assert.strictEqual(this.response.statusCode, Number(statusCode));
 
@@ -78,7 +78,7 @@ export class StoresSteps {
 
 
 	@then(/^the payload should be equal (.+)$/)
-	public checkResponseData(result: string) {
+	public checkResponseData(result: string): void {
 		if(this.response.statusCode === StatusCodes.OK){
 			this.responsePayload = JSON.parse(this.response.text);
 

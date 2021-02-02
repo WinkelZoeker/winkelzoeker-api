@@ -1,6 +1,6 @@
 /* istanbul ignore file */
 
-import { Server, Request, Response, Next, RouteOptions, RequestHandlerType, Route } from 'restify';
+import { Server } from 'restify';
 
 import { handlers } from './use-case-controllers/handlers'
 import { ApiHandler, HttpVerb } from './api-handler';

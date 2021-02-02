@@ -56,7 +56,7 @@ describe("StoreModelMapper", () => {
 			};
 			expect(() => {
 				const storeModelMapper: ModelMapper<Store> = new StoreModelMapper();
-				const mapped = storeModelMapper.mapToCoreModel(element);
+				storeModelMapper.mapToCoreModel(element);
 			}).toThrow(MappingException);
 		});
 	});

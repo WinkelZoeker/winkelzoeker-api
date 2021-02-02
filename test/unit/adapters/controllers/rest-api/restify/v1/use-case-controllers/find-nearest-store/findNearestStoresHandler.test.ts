@@ -1,35 +1,34 @@
 import "../../../../../../../loadEnvVariables";
 
-
 import httpMocks from 'node-mocks-http';
 import { StatusCodes } from "http-status-codes";
 
 import ConsoleLogger from "../../../../../../../../../src/adapters/infrastructure/consoleLogger";
 import { FindNearestStoresHandler } from "../../../../../../../../../src/adapters/controllers/rest-api/restify/v1/use-case-controllers/find-nearest-store/findNearestStoresHandler";
 import BadRequestException from "../../../../../../../../../src/adapters/controllers/exceptions/badRequestException";
-import { Logger, UseCaseResponse } from "../../../../../../../../../src/usecases/ports/infrastructure";
+import { UseCaseResponse } from "../../../../../../../../../src/usecases/ports/infrastructure";
 import AbstractController from "../../../../../../../../../src/adapters/controllers/rest-api/abstractController";
 import ResponseMapper from "../../../../../../../../../src/adapters/controllers/interfaces/responseMapper"
 import BaseException from "../../../../../../../../../src/adapters/controllers/exceptions/baseException";
-import { ApiResponse, ResponseError } from "../../../../../../../../../src/adapters/controllers/models";
-import { InternalServerError } from "restify-errors";
-import InternalServerException from "../../../../../../../../../src/adapters/controllers/exceptions/internalServerException";
+import { ApiResponse } from "../../../../../../../../../src/adapters/controllers/models";
 
 const logger = new ConsoleLogger();
 const apiVersion = 'v1';
-function next(object?: any): void { }
+function next(object?: any): void { 
+	console.log(`Object => ${JSON.stringify(object, null, 2)}`);
+}
 
 class MockController extends AbstractController {
-	public execute(event: any): Promise<UseCaseResponse> {
+	public execute(_event: any): Promise<UseCaseResponse> {
 		throw new Error("Method not implemented.");
 	}
 }
 
 export default class MockResponseMapper implements ResponseMapper {
-	mapUseCaseResponseToApiResponse(useCaseResponse: UseCaseResponse): ApiResponse {
+	mapUseCaseResponseToApiResponse(_useCaseResponse: UseCaseResponse): ApiResponse {
 		throw new Error("Method not implemented.");
 	}
-	mapErrorToApiResponse(error: BaseException): ApiResponse {
+	mapErrorToApiResponse(_error: BaseException): ApiResponse {
 		throw new Error("Method not implemented.");
 	}
 }
@@ -160,8 +159,8 @@ describe("FindNearestStoresHandler", () => {
 
 	describe("execute", () => {
 		it("should NOT throw an exception with correct coordinates and limit provided", async () => {
-			var response = httpMocks.createResponse();
-			var request = httpMocks.createRequest({
+			const response = httpMocks.createResponse();
+			const request = httpMocks.createRequest({
 				method: 'GET',
 				url: '/search',
 				query: {
@@ -197,8 +196,8 @@ describe("FindNearestStoresHandler", () => {
 		});
 
 		it("should NOT throw an exception without any coordinates and limit provided", async () => {
-			var response = httpMocks.createResponse();
-			var request = httpMocks.createRequest({
+			const response = httpMocks.createResponse();
+			const request = httpMocks.createRequest({
 				method: 'GET',
 				url: '/search',
 				query: {
@@ -232,8 +231,8 @@ describe("FindNearestStoresHandler", () => {
 		});
 
 		it("should send a 400 error with only latitude provided (limit correctly provided)", async () => {
-			var response = httpMocks.createResponse();
-			var request = httpMocks.createRequest({
+			const response = httpMocks.createResponse();
+			const request = httpMocks.createRequest({
 				method: 'GET',
 				url: '/search',
 				query: {
@@ -266,8 +265,8 @@ describe("FindNearestStoresHandler", () => {
 		});
 
 		it("should send a 500 error when an unexpected error ocurs", async () => {
-			var response = httpMocks.createResponse();
-			var request = httpMocks.createRequest({
+			const response = httpMocks.createResponse();
+			const request = httpMocks.createRequest({
 				method: 'GET',
 				url: '/search',
 				query: {

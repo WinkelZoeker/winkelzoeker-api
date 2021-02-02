@@ -1,9 +1,6 @@
 import "../../loadEnvVariables";
 
-import { Logger } from 'winston';
-
 import WebAppLogger from "../../../../src/adapters/infrastructure/webApplogger";
-import { Logger as WZLogger } from "../../../../src/usecases/ports/infrastructure";
 
 describe("WebAppLogger", () => {
 

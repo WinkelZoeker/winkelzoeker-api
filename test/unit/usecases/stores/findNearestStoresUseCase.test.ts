@@ -5,18 +5,13 @@ import StoreRepository from "../../../../src/usecases/ports/repository/storeRepo
 import FindNearestStoresUseCase from "../../../../src/usecases/stores/findNearestStoresUseCase";
 import { UseCaseRequest } from "../../../../src/usecases/ports/infrastructure";
 
-
-
-
 class MockStoreRepository implements StoreRepository {
 	async findAll(): Promise<Store[]> { throw new Error("Method not implemented."); }
-	async findByKey(key: string): Promise<Store | undefined> { throw new Error("Method not implemented."); }
-	async add(entity: Store): Promise<void> { throw new Error("Method not implemented."); }
-	async update(entity: Store): Promise<void> { throw new Error("Method not implemented."); }
-	async exists(key: string): Promise<boolean> { throw new Error("Method not implemented."); }
+	async findByKey(_key: string): Promise<Store | undefined> { throw new Error("Method not implemented."); }
+	async add(_entity: Store): Promise<void> { throw new Error("Method not implemented."); }
+	async update(_entity: Store): Promise<void> { throw new Error("Method not implemented."); }
+	async exists(_key: string): Promise<boolean> { throw new Error("Method not implemented."); }
 }
-
-import storeObject from './data/stores.json';
 
 const storesCollection: Store[] = [
 	{
@@ -95,8 +90,6 @@ describe("FindNearestStoresUseCase", () => {
 			};
 
 			const result = await findNearestStoreUC.execute(useCaseRequest);
-
-			// console.log(`result => ${JSON.stringify(result, null, 2)}`);
 			expect(spyOnStoreRepository).toHaveBeenCalled();
 			expect(result[0].uuid).toEqual("EOgKYx4XFiQAAAFJa_YYZ4At");
 			expect(result[1].uuid).toEqual("7ewKYx4Xqp0AAAFIHigYwKrH");

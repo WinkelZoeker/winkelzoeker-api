@@ -28,7 +28,7 @@ const storesCollection: Store[] = [
 ];
 
 class MockUseCase implements UseCase {
-	execute(input: any): Promise<any> { throw new Error("Method not implemented."); }
+	execute(_input: any): Promise<any> { throw new Error("Method not implemented."); }
 }
 
 describe("FindNearestStoresController", () => {

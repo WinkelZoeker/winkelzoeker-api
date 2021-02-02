@@ -1,7 +1,6 @@
 
 import { Request, Response, Next } from 'restify';
 import { ApiHandler, HttpVerb } from '../../api-handler';
-import { ApiResponse } from '../../../../../models';
 import { FindNearestStoresController } from './findNearestStoresController';
 import { Logger, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import BadRequestException from '../../../../../../controllers/exceptions/badRequestException';
@@ -45,7 +44,7 @@ export class FindNearestStoresHandler extends ApiHandler {
 		}
 	}
 
-	protected async execute(req: Request, res: Response, next: Next): Promise<UseCaseResponse> {
+	protected async execute(req: Request, _res: Response, _next: Next): Promise<UseCaseResponse> {
 
 		try {
 			const latitude = req.query.hasOwnProperty('latitude') ? req.query['latitude'] : undefined;

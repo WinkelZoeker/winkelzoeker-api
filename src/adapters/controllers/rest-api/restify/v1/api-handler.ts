@@ -1,6 +1,5 @@
-import { StatusCodes } from 'http-status-codes';
 import { Request, Response, Next } from 'restify';
-import { ApiResponse, Resource } from '../../../../controllers/models';
+import { ApiResponse } from '../../../../controllers/models';
 import { Logger, UseCaseResponse } from '../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../abstractController';
 import ResponseMapper from '../../../interfaces/responseMapper';

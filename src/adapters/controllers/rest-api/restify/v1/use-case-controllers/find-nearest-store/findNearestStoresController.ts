@@ -1,8 +1,6 @@
 import { Logger, UseCase, UseCaseRequest, UseCaseResponse } from '../../../../../../../usecases/ports/infrastructure';
 import AbstractController from '../../../../abstractController';
 
-import StoreMongoRepository from '../../../../../../repository/storeMongoRepository';
-import FindNearestStoresUseCase from '../../../../../../../usecases/stores/findNearestStoresUseCase';
 import GeoLocation from '../../../../../../../core/geoLocation';
 
 class FindNearestStoresController extends AbstractController {

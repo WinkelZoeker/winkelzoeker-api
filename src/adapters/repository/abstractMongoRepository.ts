@@ -1,39 +1,32 @@
 /* istanbul ignore file */
 
-import mongoose, { Document, Schema } from 'mongoose'
-import { join } from 'path';
+import mongoose, { Document } from 'mongoose'
 import { CRUDRepository } from '../../usecases/ports/infrastructure';
 import ModelMapper from './modelMapper';
-import { StoreDocument } from './schemas/storeSchema';
-
 
 export default abstract class AbstractMongoRepository<T, D extends Document<any>, K> implements CRUDRepository<T,K> {
 
 	public abstract get documentToCoreModelMapper(): ModelMapper<T>;
 	public abstract get repositoryDocumentModel(): mongoose.Model<D>;
 
-	constructor() {
-	}
-
-
 	async findAll() : Promise<T[]> {
 			const records = await this.repositoryDocumentModel.find();
 			return records.map(record => this.documentToCoreModelMapper.mapToCoreModel(record));
 	}
 
-	async findByKey(key: K) : Promise<T | undefined> {
-		return undefined;
+	async findByKey(_key: K) : Promise<T | undefined> {
+		throw new Error("Method not implemented.");
 	}
 
-	async add(entity: T) : Promise<void>{
+	async add(_entity: T) : Promise<void>{
+		throw new Error("Method not implemented.");
 	}
 
-	async update(entity: T) : Promise<void>{
+	async update(_entity: T) : Promise<void>{
+		throw new Error("Method not implemented.");
 	}
 
-	async exists(key: K) : Promise<boolean>{
-		return false;
+	async exists(_key: K) : Promise<boolean>{
+		throw new Error("Method not implemented.");
 	}
 }
-
-
