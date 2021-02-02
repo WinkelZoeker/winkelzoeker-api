@@ -6,6 +6,7 @@ import FindNearestStoresUseCase from "../../../../src/usecases/stores/findNeares
 import { UseCaseRequest } from "../../../../src/usecases/ports/infrastructure";
 
 class MockStoreRepository implements StoreRepository {
+	async findNearest(geoLocation: GeoLocation, limit: number): Promise<Store[]>  { throw new Error("Method not implemented."); }
 	async findAll(): Promise<Store[]> { throw new Error("Method not implemented."); }
 	async findByKey(_key: string): Promise<Store | undefined> { throw new Error("Method not implemented."); }
 	async add(_entity: Store): Promise<void> { throw new Error("Method not implemented."); }
@@ -76,12 +77,12 @@ describe("FindNearestStoresUseCase", () => {
 	});
 
 	describe("execute", () => {
-		it("should yada yada yada...", async () => {
+		it("should return the correct output", async () => {
 			const storeRepository: StoreRepository = new MockStoreRepository();
 			const findNearestStoreUC = new FindNearestStoresUseCase(storeRepository);
 
 			const spyOnStoreRepository = jest
-				.spyOn(MockStoreRepository.prototype, "findAll")
+				.spyOn(MockStoreRepository.prototype, "findNearest")
 				.mockResolvedValue(storesCollection);
 
 				const useCaseRequest: UseCaseRequest = {
@@ -91,6 +92,7 @@ describe("FindNearestStoresUseCase", () => {
 
 			const result = await findNearestStoreUC.execute(useCaseRequest);
 			expect(spyOnStoreRepository).toHaveBeenCalled();
+
 			expect(result[0].uuid).toEqual("EOgKYx4XFiQAAAFJa_YYZ4At");
 			expect(result[1].uuid).toEqual("7ewKYx4Xqp0AAAFIHigYwKrH");
 			expect(result[2].uuid).toEqual("gssKYx4XJwoAAAFbn.BMqPTb");

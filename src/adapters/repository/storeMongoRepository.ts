@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { GeoLocation } from 'src/core';
 
 import Store from '../../core/store';
 import StoreRepository from '../../usecases/ports/repository/storeRepository';
@@ -46,5 +47,17 @@ export default class StoreMongoRepository extends AbstractMongoRepository<Store,
 
 	public get repositoryDocumentModel(): mongoose.Model<StoreDocument> {
 		return storeModel;
+	}
+
+	async findNearest(geoLocation: GeoLocation, limit: number): Promise<Store[]> {
+		const filter = {
+			coordinates: {
+				$near: [geoLocation.longitude, geoLocation.latitude]	
+			}
+		}
+		const records = 
+			await this.repositoryDocumentModel.find(filter).limit(limit);
+
+		return records.map(record => this.documentToCoreModelMapper.mapToCoreModel(record));
 	}
 }

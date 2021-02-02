@@ -4,6 +4,7 @@ src/**/*.map
 test/unit/*.env
 secrets/*.env
 
+DRAFTS.md
 
 # Logs
 logs
