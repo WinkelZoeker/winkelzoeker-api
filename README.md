@@ -187,6 +187,7 @@ npm run stack:full:up
 * Introduce some cache for the query. The database state is unlikely to change (unless a new store is opened), so the data can be stored on memory with long **time-to-live** set.
 * Introduce a dependency injection mechanism like [Inversify](https://inversify.io/).
 * Introduce a schemma validator for validating requests based on the api specification on the handler, avoiding the developer to create validation code for each endpoint. That can be achieved using libraries like [api-schema-builder](https://github.com/PayU/api-schema-builder).
+* Add a MongoDB instance on the docker-compose file, avoiding external dependencies.
 
 ## Author
 
