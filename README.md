@@ -181,9 +181,11 @@ npm run stack:full:up
 
 
 ## Improvements
-* 1
-* 2
-* ...
+* Generate a transaction id on the handler, enabling the logs to be grouped among other microservices' calls (if introduced later).
+* Specialize the log mechanism for Request logs (handler) and Audit logs (use cases).
+* Enable the log mechanism to use tools like Elastic Search.
+* Introduce some cache for the query. The database state is unlikely to change (unless a new store is opened), so the data can be stored on memory with long **time-to-live** set.
+
 
 ## Author
 
