@@ -28,15 +28,19 @@ export class FindNearestStoresHandler extends ApiHandler {
 		const limit = queryParams.hasOwnProperty('limit') ? queryParams['limit'] : undefined;
 
 		// TODO: Stack errors if time permits/get an out of the box validator for restify
+		if (oneCoordinateElementMissing(latitude, longitude)) {
+			throw new BadRequestException('Both geographic coordinates should be provided');
+		}
+
+		if (!(latitude && longitude)) {
+			throw new BadRequestException('Both geographic coordinates should be provided');
+		}
+
 		if (latitude && isNaN(latitude)) {
 			throw new BadRequestException('The geographic latitude is in wrong format');
 		}
 		if (longitude && isNaN(longitude)) {
 			throw new BadRequestException('The geographic longitude is in wrong format');
-		}
-
-		if (oneCoordinateElementMissing(latitude, longitude)) {
-			throw new BadRequestException('Both geographic coordinates should be provided');
 		}
 
 		if (limit && isNaN(limit)) {

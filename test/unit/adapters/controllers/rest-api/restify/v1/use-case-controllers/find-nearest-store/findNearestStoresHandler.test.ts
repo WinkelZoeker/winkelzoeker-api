@@ -69,7 +69,7 @@ describe("FindNearestStoresHandler", () => {
 			}).not.toThrow(BadRequestException);
 		});
 
-		it("should NOT throw an exception without any coordinates and limit provided", async () => {
+		it("should throw an exception when there are no coordinates nor limit provided", async () => {
 			const findNearestStoresHandler: FindNearestStoresHandler =
 				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 			const queryParams = {
@@ -79,7 +79,7 @@ describe("FindNearestStoresHandler", () => {
 			expect(findNearestStoresHandler.endpoint).toEqual("/v1/stores");
 			expect(() => {
 				findNearestStoresHandler.validateRequest(queryParams)
-			}).not.toThrow(BadRequestException);
+			}).toThrow(BadRequestException);
 		});
 
 		it("should throw an exception with only latitude provided (limit correctly provided)", async () => {
@@ -195,7 +195,7 @@ describe("FindNearestStoresHandler", () => {
 			expect(spyOnResponseSend).toHaveBeenCalledWith(200, responseMapper);
 		});
 
-		it("should NOT throw an exception without any coordinates and limit provided", async () => {
+		it("should send a 400 error when no coordinates and limit provided", async () => {
 			const response = httpMocks.createResponse();
 			const request = httpMocks.createRequest({
 				method: 'GET',
@@ -205,29 +205,27 @@ describe("FindNearestStoresHandler", () => {
 				}
 			});
 
-			const ucReturn: UseCaseResponse = {
-				stores: [],
-			};
-
 			const responseMapper = {
-				statusCode: StatusCodes.OK,
-				data: ucReturn.stores
+				statusCode: StatusCodes.BAD_REQUEST,
+				error: "Both geographic coordinates should be provided"
 			};
 
-			const spyOnMockController = jest.spyOn(MockController.prototype, "execute").mockResolvedValue(ucReturn);
-			const spyOnMockMapper = jest.spyOn(MockResponseMapper.prototype, "mapUseCaseResponseToApiResponse").mockReturnValue(responseMapper);
+			const spyOnMockController = jest.spyOn(MockController.prototype, "execute");
+			const spyOnMockMapper = jest.spyOn(MockResponseMapper.prototype, "mapUseCaseResponseToApiResponse");
+			const spyOnMockMapperError = jest.spyOn(MockResponseMapper.prototype, "mapErrorToApiResponse").mockReturnValue(responseMapper);
 			const spyOnResponseSend = jest.spyOn(response, "send");
+			const findNearestStoresHandler: FindNearestStoresHandler =
+				new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 
 			try {
-				const findNearestStoresHandler: FindNearestStoresHandler =
-					new FindNearestStoresHandler(new MockController(logger), new MockResponseMapper(), logger, apiVersion);
 				await findNearestStoresHandler.handler(request, response, next);
 			} catch (error) {
 				expect(false).toBeTruthy();
 			}
-			expect(spyOnMockController).toHaveBeenCalled();
-			expect(spyOnMockMapper).toHaveBeenCalled();
-			expect(spyOnResponseSend).toHaveBeenCalledWith(200, responseMapper);
+			expect(spyOnMockController).not.toHaveBeenCalled();
+			expect(spyOnMockMapper).not.toHaveBeenCalled();
+			expect(spyOnMockMapperError).toHaveBeenCalled();
+			expect(spyOnResponseSend).toHaveBeenCalledWith(400, responseMapper);
 		});
 
 		it("should send a 400 error with only latitude provided (limit correctly provided)", async () => {
