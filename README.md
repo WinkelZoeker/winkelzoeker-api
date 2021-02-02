@@ -32,9 +32,9 @@ To calculate the distance between two coordinates, it is necessary to rely on sp
 
 This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), whith the following structure:
 
-* core: core business structures, in this case, the Store and the GeoLocation.
-* usecases: The use cases implemented by this api, as well the infrasctructure interfaces that should be implemented via adapters. 
-* adapters: The outer layer, the 'dirtiest' part of the system. All technology related considerations are addressed here.
+* **core**: core business structures, in this case, the Store and the GeoLocation.
+* **usecases**: The use cases implemented by this api, as well the infrasctructure interfaces that should be implemented via adapters. 
+* **adapters**: The outer layer, the 'dirtiest' part of the system. All technology related considerations are addressed here.
 
 
 ## Technologies
