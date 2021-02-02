@@ -23,16 +23,16 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.43% </span>
+                <span class="strong">96.67% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>27/28</span>
+                <span class='fraction'>29/30</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">92.31% </span>
+                <span class="strong">86.67% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>24/26</span>
+                <span class='fraction'>26/30</span>
             </div>
         
             
@@ -44,9 +44,9 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.43% </span>
+                <span class="strong">96.67% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>27/28</span>
+                <span class='fraction'>29/30</span>
             </div>
         
             
@@ -133,7 +133,11 @@
 <a name='L74'></a><a href='#L74'>74</a>
 <a name='L75'></a><a href='#L75'>75</a>
 <a name='L76'></a><a href='#L76'>76</a>
-<a name='L77'></a><a href='#L77'>77</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
@@ -164,34 +168,38 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">12x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">10x</span>
 <span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">9x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">7x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -239,15 +247,19 @@ export class FindNearestStoresHandler extends ApiHandler {
 		const limit = queryParams.hasOwnProperty('limit') ? queryParams['limit'] : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
 &nbsp;
 		// TODO: Stack errors if time permits/get an out of the box validator for restify
+		if (oneCoordinateElementMissing(latitude, longitude)) {
+			throw new BadRequestException('Both geographic coordinates should be provided');
+		}
+&nbsp;
+		if (!(latitude &amp;&amp; longitude)) {
+			throw new BadRequestException('Both geographic coordinates should be provided');
+		}
+&nbsp;
 		if (latitude &amp;&amp; isNaN(latitude)) {
 			throw new BadRequestException('The geographic latitude is in wrong format');
 		}
 		if (longitude &amp;&amp; isNaN(longitude)) {
 			throw new BadRequestException('The geographic longitude is in wrong format');
-		}
-&nbsp;
-		if (oneCoordinateElementMissing(latitude, longitude)) {
-			throw new BadRequestException('Both geographic coordinates should be provided');
 		}
 &nbsp;
 		if (limit &amp;&amp; isNaN(limit)) {
@@ -258,8 +270,8 @@ export class FindNearestStoresHandler extends ApiHandler {
 	protected async execute(req: Request, _res: Response, _next: Next): Promise&lt;UseCaseResponse&gt; {
 &nbsp;
 		try {
-			const latitude = req.query.hasOwnProperty('latitude') ? req.query['latitude'] : undefined;
-			const longitude = req.query.hasOwnProperty('longitude') ? req.query['longitude'] : undefined;
+			const latitude = req.query.hasOwnProperty('latitude') ? req.query['latitude'] : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
+			const longitude = req.query.hasOwnProperty('longitude') ? req.query['longitude'] : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
 			const limit = req.query.hasOwnProperty('limit') ? req.query['limit'] : <span class="branch-1 cbranch-no" title="branch not covered" >undefined;</span>
 &nbsp;
 			const event = {
@@ -292,7 +304,7 @@ export default (logger: Logger, apiVersion: string): ApiHandler =&gt;{
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Tue Feb 02 2021 21:38:17 GMT+0000 (Coordinated Universal Time)
+                at Tue Feb 02 2021 22:47:02 GMT+0000 (Coordinated Universal Time)
             </div>
         </div>
         <script src="../../../../../../../prettify.js"></script>

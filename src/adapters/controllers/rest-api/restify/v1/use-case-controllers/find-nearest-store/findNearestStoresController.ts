@@ -13,7 +13,7 @@ class FindNearestStoresController extends AbstractController {
 		this.logger.info(`FindNearestStoresController.execute, event = ${JSON.stringify(event, null, 2)}`);
 
 		const useCaseRequest: UseCaseRequest = {
-			limit: event.limit || 5
+			limit: Number(event.limit) || 5
 		};
 
 		if(event.latitude && event.longitude) {

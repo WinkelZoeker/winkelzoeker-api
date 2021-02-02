@@ -6,7 +6,7 @@ import FindNearestStoresUseCase from "../../../../src/usecases/stores/findNeares
 import { UseCaseRequest } from "../../../../src/usecases/ports/infrastructure";
 
 class MockStoreRepository implements StoreRepository {
-	async findNearest(geoLocation: GeoLocation, limit: number): Promise<Store[]>  { throw new Error("Method not implemented."); }
+	async findNearest(_geoLocation: GeoLocation, _limit: number): Promise<Store[]>  { throw new Error("Method not implemented."); }
 	async findAll(): Promise<Store[]> { throw new Error("Method not implemented."); }
 	async findByKey(_key: string): Promise<Store | undefined> { throw new Error("Method not implemented."); }
 	async add(_entity: Store): Promise<void> { throw new Error("Method not implemented."); }

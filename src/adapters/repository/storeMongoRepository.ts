@@ -56,7 +56,7 @@ export default class StoreMongoRepository extends AbstractMongoRepository<Store,
 			}
 		}
 		const records = 
-			await this.repositoryDocumentModel.find(filter).limit(limit);
+			await this.repositoryDocumentModel.find(filter).limit(Number(limit) || 5);
 
 		return records.map(record => this.documentToCoreModelMapper.mapToCoreModel(record));
 	}

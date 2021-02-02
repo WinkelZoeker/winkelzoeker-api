@@ -8,7 +8,6 @@ module.exports = {
     "plugin:@typescript-eslint/recommended" // Uses the recommended rules from the @typescript-eslint/eslint-plugin
   ],
   rules: {
-    "@typescript-eslint/no-floating-promises": "warn",
     "@typescript-eslint/no-explicit-any": "off", // to be enabled again
     "@typescript-eslint/no-empty-interface": "off",
     "@typescript-eslint/no-var-requires": "off",
