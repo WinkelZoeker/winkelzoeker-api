@@ -91,6 +91,15 @@ For the unit tests:
 ```sh
 npm run test:unit
 ```
+
+### Test Coverage Report
+
+Code coverage report is located at [here](./reports/index.html) and can be re-generated via the command
+
+```sh
+npm run test:coverage
+```
+
 ### Integration/E2E testing
 
 For the integration/e2e tests, several `Gherkin` tests are provided using the BDD approach.The list of features can be found the the [main.feature](./test/e2e/features/stores/main.feature) file. In order to run those tests, one must first start the service in one shell window using npm:
@@ -151,13 +160,6 @@ This endpoint provides, by default, the 5 closest stores on the database, ordere
 
 This API is versioned via url for practical purposes only. One possible refactor would be using **Media Type Versioning**, including the desired version on `Accept` header.
 
-### Coverage Report
-
-Code coverage report is located at `reports/index.html` and can be generated via the command
-
-```sh
-npm run test:coverage
-```
 
 ## CICD pipeline
 
