@@ -176,7 +176,7 @@ npm run stack:full:up
 
 
 ## Improvements
-* Implement the missing methods on [AbstractMongoRepository](.src/adapters/repository/abstractMongoRepository.ts) for a full CRUD experience.
+* Implement the missing methods on [AbstractMongoRepository](./src/adapters/repository/abstractMongoRepository.ts) for a full CRUD experience.
 * Generate a transaction id on the handler, enabling the logs to be grouped among other microservices' calls (if introduced later).
 * Specialize the log mechanism for Request logs (handler) and Audit logs (use cases).
 * Enable the log mechanism to use tools like Elastic Search.
