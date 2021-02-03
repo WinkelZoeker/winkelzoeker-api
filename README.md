@@ -44,7 +44,8 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 - [Winston](https://github.com/winstonjs/winston)
 - [Jest](https://www.docker.com)
 - [Cucumber](https://cucumber.io/)
-- [Docker and docker-compose](https://www.docker.com/?)
+- [Docker and docker-compose](https://www.docker.com/), for running the images without building the system.
+
 
 ## Prerequisites
 
