@@ -53,6 +53,13 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 
 ## Install and Running
 
+First, clone locally this repository, then follow the instructions for running it from source or via docker-compose, along with the front end.
+
+
+```sh
+$ git clone https://github.com/WinkelZoeker/winkelzoeker-api.git
+```
+
 ### Secrets handling and dependencies installation
 
 The application relies on configurations set as environment variables. In order to inject those configurations, we provide an encrypted file containing all the configurations needed (otherwhise we would have to use a service like Hashicorpo Vault, or AWS Parameter Store/Secrets Manager).  
