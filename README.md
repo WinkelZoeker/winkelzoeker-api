@@ -25,7 +25,7 @@
 ### 🏠 [Homepage](https://github.com/WinkelZoeker/winkelzoeker-api#readme)
 
 
-This API provides one endpoint to get the nearest stores based on geographic coordinates given in decimal degrees.
+This API provides one [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) endpoint to get the nearest stores based on geographic coordinates given in decimal degrees.
 
 To calculate the distance between two coordinates, it is necessary to rely on spherical trigonometry, using the [haversine distance formula](https://en.wikipedia.org/wiki/Haversine_formula).
 
