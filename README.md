@@ -27,7 +27,7 @@
 
 This API provides one [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) endpoint to get the nearest stores based on geographic coordinates given in decimal degrees.
 
-To calculate the distance between two coordinates, it is necessary to rely on spherical trigonometry, using the [haversine distance formula](https://en.wikipedia.org/wiki/Haversine_formula).
+To calculate the distance between two coordinates, it is necessary to rely on spherical trigonometry, using the [haversine distance formula](https://en.wikipedia.org/wiki/Haversine_formula). As an architectural choice aiming performance, the system relies on MongoDB for the queries using its geospatial capabilities.
 
 This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), whith the following structure:
 
