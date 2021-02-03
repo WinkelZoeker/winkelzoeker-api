@@ -93,10 +93,10 @@ npm run test:unit
 ```
 ### Integration/E2E testing
 
-The integration/e2e tests, several `Gherkin` tests are provided using the BDD approach. In order to run those tests, first start the service in one shell window using npm:
+For the integration/e2e tests, several `Gherkin` tests are provided using the BDD approach.The list of features can be found the the [main.feature](./test/e2e/features/stores/main.feature) file. In order to run those tests, one must first start the service in one shell window using npm:
 
 ```sh
-npm run start
+source ./secrets/.DEV.env && npm run start
 ```
 
 then run the tests on another shell (with .DEV.env loaded via `source ./secrets/.DEV.env`)
@@ -107,10 +107,10 @@ source ./secrets/.DEV.env && npm run test:e2e
 
 ### Smoke test
 
-For smoke testing, run the small script `./test/e2e_restify.sh` to check if the service is online after you start the service via `npm run start` (with the environment variables loaded)
+Once the application is deployed, it is possible to run a small script for smoke testing [provided](./test/e2e_restify.sh), to check if the service is online.
 
 ```sh
-source ./secrets/.DEV.env && ./test/e2e_restify.sh
+./test/e2e_restify.sh
 ```
 
 ## API Usage
@@ -121,26 +121,30 @@ It is provided an [OpenApi v3](api.yml) documentation, which can be [tested onli
 This endpoint provides, by default, the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like the excerpt bellow:
 
 ```json
-[
-  {
-    "city": "Aalsmeer",
-    "postalCode": "1431 HN",
-    "street": "Ophelialaan",
-    "street2": 124,
-    "street3": "Building",
-    "addressName": "Jumbo Aalsmeer Ophelialaan",
-    "uuid": "gssKYx4XJwoAAAFbn.BMqPTb",
-    "longitude": 4.762433,
-    "latitude": 52.264417,
-    "complexNumber": 33010,
-    "showWarningMessage": false,
-    "todayOpen": "08:00",
-    "locationType": "SupermarktPuP",
-    "collectionPoint": true,
-    "sapStoreID": 3178,
-    "todayClose": 1320
-  }
-]
+{  
+	"statusCode":  200,  
+	"data":
+		[
+		  {
+		    "city": "Aalsmeer",
+		    "postalCode": "1431 HN",
+		    "street": "Ophelialaan",
+		    "street2": 124,
+		    "street3": "Building",
+		    "addressName": "Jumbo Aalsmeer Ophelialaan",
+		    "uuid": "gssKYx4XJwoAAAFbn.BMqPTb",
+		    "longitude": 4.762433,
+		    "latitude": 52.264417,
+		    "complexNumber": 33010,
+		    "showWarningMessage": false,
+		    "todayOpen": "08:00",
+		    "locationType": "SupermarktPuP",
+		    "collectionPoint": true,
+		    "sapStoreID": 3178,
+		    "todayClose": 1320
+		  }
+		]
+}
 ```
 
 ### Versioning
