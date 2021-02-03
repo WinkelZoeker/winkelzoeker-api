@@ -94,7 +94,7 @@ npm run test:unit
 
 ### Test Coverage Report
 
-Code coverage report is located at [here](./reports/index.html) and can be re-generated via the command
+Code coverage report is located at [./reports/index.html](./reports/index.html) and can be re-generated via the command
 
 ```sh
 npm run test:coverage
