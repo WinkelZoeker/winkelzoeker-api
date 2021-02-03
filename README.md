@@ -22,7 +22,6 @@
 ![Build](https://github.com/WinkelZoeker/winkelzoeker-api/workflows/Build%20image/badge.svg)
 
 
-
 ### 🏠 [Homepage](https://github.com/WinkelZoeker/winkelzoeker-api#readme)
 
 
@@ -32,20 +31,19 @@ To calculate the distance between two coordinates, it is necessary to rely on sp
 
 This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), whith the following structure:
 
-* **core**: core business structures, in this case, the Store and the GeoLocation.
-* **usecases**: The use cases implemented by this api, as well the infrasctructure interfaces that should be implemented via adapters. 
-* **adapters**: The outer layer, the 'dirtiest' part of the system. All technology related considerations are addressed here.
-
+* **core**: core business structures, in this case, the Store and the GeoLocation objects.
+* **usecases**: The use cases implemented by this API, as well the infrasctructure interfaces(**ports**) that should be implemented via adapters. 
+* **adapters**: The outer layer, the 'dirtiest' part of the system. All technology related considerations and choices are addressed here.
 
 ## Technologies
 
 - [NodeJs](https://nodejs.org/)
-- [Jest](https://www.docker.com)
-- [MongoDB](https://www.mongodb.com/)
 - [Restify](http://restify.com/)
+- [MongoDB](https://www.mongodb.com/)
 - [Winston](https://github.com/winstonjs/winston)
+- [Jest](https://www.docker.com)
 - [Cucumber](https://cucumber.io/)
-- [Docker](https://www.docker.com/?)
+- [Docker and docker-compose](https://www.docker.com/?)
 
 ## Prerequisites
 
@@ -103,12 +101,11 @@ source ./secrets/.DEV.env && ./test/e2e_restify.sh
 ```
 
 ## API Usage
-[OpenApi v3](api.yml) documentation is available.
-You can [try it](https://validator.swagger.io/?url=https://raw.githubusercontent.com/WinkelZoeker/winkelzoeker-api/main/api.yml) online
+It is provided an [OpenApi v3](api.yml) documentation, which can be [tested online](https://validator.swagger.io/?url=https://raw.githubusercontent.com/WinkelZoeker/winkelzoeker-api/main/api.yml).
 
 >http://127.0.0.1:3000/v1/stores?latitude={double}&longitude={double}
 
-This endpoint provides, by default,  the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like the excerpt bellow:
+This endpoint provides, by default, the 5 closest stores on the database, ordered by distance, to the provided `latitude` and `longitude` coordinates, with the response looking  like the excerpt bellow:
 
 ```json
 [
@@ -183,6 +180,7 @@ npm run stack:full:up
 * Introduce a dependency injection mechanism like [Inversify](https://inversify.io/).
 * Introduce a schemma validator for validating requests based on the api specification on the handler, avoiding the developer to create validation code for each endpoint. That can be achieved using libraries like [api-schema-builder](https://github.com/PayU/api-schema-builder).
 * Add a MongoDB instance on the docker-compose file, avoiding external dependencies.
+* Paging for when the user chooses a limit bigger than a certain value.
 
 ## Github Codespaces remarks
 
