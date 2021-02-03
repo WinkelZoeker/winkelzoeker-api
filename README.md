@@ -1,3 +1,4 @@
+
 <h1 align="center">Welcome to winkelzoeker-api :satellite:</h1>
 <p>
   <img alt="Version" src="https://img.shields.io/badge/version-1.0.0-blue.svg?cacheSeconds=2592000" />
@@ -29,11 +30,11 @@ This API provides one [REST](https://en.wikipedia.org/wiki/Representational_stat
 
 To calculate the distance between two coordinates, it is necessary to rely on spherical trigonometry, using the [haversine distance formula](https://en.wikipedia.org/wiki/Haversine_formula). As an architectural choice aiming performance, the system relies on MongoDB for the queries using its geospatial capabilities.
 
-This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), whith the following structure:
+This project is implemented based on [Clean Architecture](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html) and [Hexagonal architecture](https://alistair.cockburn.us/hexagonal-architecture/), with the following structure:
 
-* **core**: core business structures, in this case, the Store and the GeoLocation objects.
+* **core**: core business structures. In this case, the Store and the GeoLocation objects.
 * **usecases**: The use cases implemented by this API, as well the infrasctructure interfaces(**ports**) that should be implemented via adapters. 
-* **adapters**: The outer layer, the 'dirtiest' part of the system. All technology related considerations and choices are addressed here.
+* **adapters**: The outermost layer in the Hexagonal approach, the *dirtiest* part of the system. All technology related considerations and choices are addressed here, like the database implementation (NoSQL, Relational, vendor X or Y), the way the system will be accessed (web interface, CLI), or how this access will be implemented(REST endpoints, GraphQL, etc) .
 
 ## Technologies
 
@@ -50,19 +51,20 @@ This project is implemented based on [Clean Architecture](https://blog.cleancode
 - Node 14
 - Port 3000 available (for Node serve API content)
 - External conection enabled to use external database via MongoDB Atlas.
+- [gpg](https://gnupg.org/) 
 
 ## Install and Running
 
 First, clone locally this repository, then follow the instructions for running it from source or via docker-compose, along with the front end.
 
-
 ```sh
 $ git clone https://github.com/WinkelZoeker/winkelzoeker-api.git
+$ cd ./winkelzoeker-api
 ```
 
 ### Secrets handling and dependencies installation
 
-The application relies on configurations set as environment variables. In order to inject those configurations, we provide an encrypted file containing all the configurations needed (otherwhise we would have to use a service like Hashicorpo Vault, or AWS Parameter Store/Secrets Manager).  
+The application relies on configurations set as environment variables. In order to inject those configurations, we provide an encrypted file containing all the configurations needed (otherwhise we would have to use a service like Hashicorp Vault or AWS Parameter Store/Secrets Manager).  
 
 First decrypt `.DEV.env` secrets into `.DEV.env.gpg.decrypted` and move it to `.DEV.env` using the `KEY` provided. This step should be done only once using the script `./bin/handle-secret.sh` provided.
 
@@ -71,8 +73,12 @@ $ ./bin/handle-secret.sh -f ./secrets/.DEV.env.gpg -d --key <KEY>
 $ mv ./secrets/.DEV.env.gpg.decrypted ./secrets/.DEV.env
 $ source ./secrets/.DEV.env
 ```
+For a quick check,  run the following command.
 
-Then 
+```sh
+$ echo $MONGO_DATABASE
+```
+If it returned `winkelzoeker-database` as result, we are able to install the dependencies via the following command, and then run the tests.
 
 ```sh
 npm install
