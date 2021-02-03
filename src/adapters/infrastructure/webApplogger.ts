@@ -2,6 +2,9 @@ import winston from 'winston';
 
 import { Logger } from "../../usecases/ports/infrastructure";
 
+/**
+ * Logger implementation for the Web application, using Winston framework
+ */
 export default class WebAppLogger implements Logger {
 	public logger: any;
 

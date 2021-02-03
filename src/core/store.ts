@@ -1,3 +1,6 @@
+/**
+ * Store object
+ */
 export default interface Store {
 	city: string;
 	postalCode: string;

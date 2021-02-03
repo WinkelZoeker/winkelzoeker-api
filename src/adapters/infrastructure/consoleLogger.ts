@@ -1,5 +1,8 @@
 import { Logger } from "../../usecases/ports/infrastructure";
 
+/**
+ * Logger implementation for the Web application, using console (mainly for the tests)
+ */
 export default class ConsoleLogger implements Logger {
   debug(message: any, _data?: any): void {
     console.log(message);
