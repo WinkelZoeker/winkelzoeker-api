@@ -192,18 +192,17 @@ npm run stack:full:up
 
 
 ## Improvements
+
+Here I list some things that I believe can be implemented to improve the architecture and funcionality of the API:
+
 * Implement the missing methods on [AbstractMongoRepository](./src/adapters/repository/abstractMongoRepository.ts) for a full CRUD experience.
 * Generate a transaction id on the handler, enabling the logs to be grouped among other microservices' calls (if introduced later).
 * Specialize the log mechanism for Request logs (handler) and Audit logs (use cases).
-* Enable the log mechanism to use tools like Elastic Search.
+* Enable the log mechanism to use tools like Elastic Search/Kibana.
 * Introduce a dependency injection mechanism like [Inversify](https://inversify.io/).
 * Introduce a schemma validator for validating requests based on the api specification on the handler, avoiding the developer to create validation code for each endpoint. That can be achieved using libraries like [api-schema-builder](https://github.com/PayU/api-schema-builder).
 * Add a MongoDB instance on the docker-compose file, avoiding external dependencies.
-* Paging for when the user chooses a limit bigger than a certain value.
-
-## Github Codespaces remarks
-
-* If docker 'dies' between sessions, run 'sudo dockerd'
+* Add paging for when the user chooses a limit bigger than a certain value.
 
 
 ## Author
