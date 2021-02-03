@@ -175,20 +175,19 @@ npm run stack:full:up
  > http://localhost:8080/
 
 
-## VSCode remarks
-
-* If docker 'dies' between sessions, run 'sudo dockerd'
-
-
 ## Improvements
 * Implement the missing methods on `abstractMongoRepository` for a full CRUD experience.
 * Generate a transaction id on the handler, enabling the logs to be grouped among other microservices' calls (if introduced later).
 * Specialize the log mechanism for Request logs (handler) and Audit logs (use cases).
 * Enable the log mechanism to use tools like Elastic Search.
-* Introduce some cache for the query. The database state is unlikely to change (unless a new store is opened), so the data can be stored on memory with long **time-to-live** set.
 * Introduce a dependency injection mechanism like [Inversify](https://inversify.io/).
 * Introduce a schemma validator for validating requests based on the api specification on the handler, avoiding the developer to create validation code for each endpoint. That can be achieved using libraries like [api-schema-builder](https://github.com/PayU/api-schema-builder).
 * Add a MongoDB instance on the docker-compose file, avoiding external dependencies.
+
+## Github Codespaces remarks
+
+* If docker 'dies' between sessions, run 'sudo dockerd'
+
 
 ## Author
 
