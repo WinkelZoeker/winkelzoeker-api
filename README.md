@@ -204,6 +204,7 @@ Here I list some things that I believe can be implemented to improve the archite
 * Introduce a schemma validator for validating requests based on the api specification on the handler, avoiding the developer to create validation code for each endpoint. That can be achieved using libraries like [api-schema-builder](https://github.com/PayU/api-schema-builder).
 * Add a MongoDB instance on the docker-compose file, avoiding external dependencies.
 * Add paging for when the user chooses a limit bigger than a certain value.
+* For production system, use of a better secret management tool instead of gpgp, like SecretHub, Hashicorp Vault or AWS Parameter Store/Secrets Manager.
 
 
 ## Author
