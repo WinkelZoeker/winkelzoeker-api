@@ -3,7 +3,6 @@ info:
   title: WinkelZoeker API
   description: WinkelZoeker API project
   version: 0.1.9
-  basePath: "/v2"
 servers:
   - url: http://localhost:3000/v1/
     description: Local server
