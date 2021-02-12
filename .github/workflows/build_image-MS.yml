@@ -49,7 +49,7 @@ jobs:
       run: docker build . --file Dockerfile-MS.yml --tag winkelzoeker/winkelzoeker.api:head
       
     - name: Docker Push
-      run: docker push winkelzoeker/winkelzoeker.api
+      run: docker push --all-tags winkelzoeker/winkelzoeker.api
 
 
 
